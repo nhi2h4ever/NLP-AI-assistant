@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Bí mật: KHÔNG đưa lên GitHub
+.streamlit/secrets.toml
+
+# Nhật ký chạy trên máy (có câu hỏi của người dùng)
+logs/
+
+# Sản phẩm của chế độ demo (dữ liệu mẫu). models/demo/ được giữ lại để có thể
+# triển khai bản demo lên Streamlit Cloud (Secrets: FAQ_ROUTER_DEMO = "1").
+reports/demo/
+data/sample/splits/

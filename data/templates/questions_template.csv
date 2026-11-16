@@ -1,0 +1,4 @@
+id,text,label,source,multi_intent,annotator,faq_id
+Q0001,Khi nào có lịch thi lại môn Giải tích 1 ạ?,LICH_THI,form,0,Nhi,F004
+Q0002,Học phí bao nhiêu và khi nào thi ạ?,HOC_PHI,form,1,Thắng,
+Q0003,lich thi lai hk nay co chua ad,LICH_THI,team,0,Tâm,

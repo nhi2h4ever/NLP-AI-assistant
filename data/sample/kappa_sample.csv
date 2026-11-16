@@ -1,0 +1,14 @@
+text,label_a,label_b
+Khi nào có lịch thi lại môn Giải tích 1?,LICH_THI,LICH_THI
+Hạn đóng học phí kỳ này ngày mấy?,HOC_PHI,HOC_PHI
+Quy định thi lại mấy lần?,LICH_THI,QUY_CHE
+Em muốn đổi giảng viên hướng dẫn,DO_AN,DO_AN
+Cần bao nhiêu tín chỉ để tốt nghiệp?,QUY_CHE,QUY_CHE
+Xin giấy xác nhận sinh viên ở đâu?,KHAC,KHAC
+Học bổng xét GPA bao nhiêu?,HOC_BONG,QUY_CHE
+Miễn giảm học phí nộp hồ sơ ở đâu?,HOC_BONG,HOC_PHI
+Thời khóa biểu xem ở đâu?,LICH_HOC,LICH_HOC
+Đăng ký học phần trễ được không?,LICH_HOC,LICH_HOC
+Phúc khảo bài thi thế nào?,LICH_THI,LICH_THI
+Điều kiện làm khóa luận?,DO_AN,DO_AN
+Gần trường có quán cơm nào ngon?,KHAC,KHAC

@@ -1,0 +1,146 @@
+id,text,label,source,multi_intent,annotator,faq_id
+D0001,Thứ 5 này lớp Cấu trúc dữ liệu có học bù không ạ?,LICH_HOC,demo,0,demo,
+D0002,Cho em hỏi thời khóa biểu học kỳ 2 xem ở đâu ạ,LICH_HOC,demo,0,demo,F001
+D0003,lop ctdl hom nay nghi hoc dung khong ad,LICH_HOC,demo,0,demo,
+D0004,Em muốn đăng ký học phần trễ hạn thì có được không ạ?,LICH_HOC,demo,0,demo,F002
+D0005,Khi nào mở cổng đăng ký học phần học kỳ hè vậy ạ,LICH_HOC,demo,0,demo,
+D0006,Môn Toán rời rạc học ở phòng nào vậy mọi người,LICH_HOC,demo,0,demo,
+D0007,e muon huy hoc phan da dang ky thi lam sao a,LICH_HOC,demo,0,demo,F003
+D0008,Lớp học phần Xác suất thống kê bị hủy thì em phải đăng ký lại lớp khác không ạ?,LICH_HOC,demo,0,demo,
+D0009,Tuần sau có lịch học bù môn Mạng máy tính không thầy,LICH_HOC,demo,0,demo,
+D0010,đk học phần bị lỗi không vào được trang thì làm sao ạ,LICH_HOC,demo,0,demo,
+D0011,Em có thể rút bớt học phần sau khi đã đăng ký không?,LICH_HOC,demo,0,demo,F003
+D0012,Học kỳ này em đăng ký tối đa được bao nhiêu tín chỉ ạ,LICH_HOC,demo,0,demo,
+D0013,lich hoc mon triet tuan nay doi phong a?,LICH_HOC,demo,0,demo,
+D0014,Cho em hỏi khi nào trường mở thêm lớp cho môn Giải tích 2,LICH_HOC,demo,0,demo,
+D0015,Em bị trùng lịch hai môn học thì xử lý sao ạ?,LICH_HOC,demo,0,demo,
+D0016,Thời khóa biểu có thay đổi sau khi điều chỉnh đăng ký không ạ,LICH_HOC,demo,0,demo,
+D0017,lớp tiếng anh 2 học online hay học trực tiếp vậy ad,LICH_HOC,demo,0,demo,
+D0018,Em quên đăng ký môn bắt buộc thì có được đăng ký bổ sung không?,LICH_HOC,demo,0,demo,F002
+D0019,Ngày nào bắt đầu học kỳ mới vậy ạ,LICH_HOC,demo,0,demo,
+D0020,Môn thực hành vật lý học ca mấy vậy ạ,LICH_HOC,demo,0,demo,
+D0021,Khi nào có lịch thi lại môn Giải tích 1 ạ?,LICH_THI,demo,0,demo,F004
+D0022,khi nao co lich thi cuoi ky hoc ky nay vay ad,LICH_THI,demo,0,demo,
+D0023,Em bị ốm không đi thi được thì xin hoãn thi thế nào ạ?,LICH_THI,demo,0,demo,F005
+D0024,Phòng thi môn Kinh tế vi mô ở đâu ạ,LICH_THI,demo,0,demo,
+D0025,Em muốn phúc khảo bài thi cuối kỳ thì làm thủ tục gì?,LICH_THI,demo,0,demo,F006
+D0026,Bao giờ có điểm thi môn Lập trình hướng đối tượng vậy ạ,LICH_THI,demo,0,demo,
+D0027,thi lại có mất phí không a,LICH_THI,demo,0,demo,
+D0028,Lịch thi giữa kỳ môn Hệ điều hành xem ở đâu vậy,LICH_THI,demo,0,demo,
+D0029,Em bị trùng lịch thi hai môn thì phải làm sao ạ?,LICH_THI,demo,0,demo,
+D0030,Điểm thi của em bị sai so với bài làm thì khiếu nại ở đâu?,LICH_THI,demo,0,demo,F006
+D0031,Đi thi cần mang theo giấy tờ gì ạ,LICH_THI,demo,0,demo,
+D0032,Em đến trễ 15 phút có được vào phòng thi không?,LICH_THI,demo,0,demo,
+D0033,Thời hạn nộp đơn phúc khảo là bao lâu sau khi có điểm ạ,LICH_THI,demo,0,demo,
+D0034,thi cuoi ky mon mang may tinh la thi trac nghiem hay tu luan a,LICH_THI,demo,0,demo,
+D0035,Quy định thi lại mấy lần vậy ạ?,LICH_THI,demo,0,demo,
+D0036,Em vắng thi có lý do thì có được thi bù không,LICH_THI,demo,0,demo,F005
+D0037,Khi nào công bố kết quả phúc khảo ạ,LICH_THI,demo,0,demo,
+D0038,lich thi lai hk nay co chua ad,LICH_THI,demo,0,demo,F004
+D0039,Môn thể dục thi vào ngày nào vậy ạ,LICH_THI,demo,0,demo,
+D0040,Em muốn xem lại bài thi của mình được không ạ?,LICH_THI,demo,0,demo,F006
+D0041,Hạn đóng học phí học kỳ này là ngày mấy ạ?,HOC_PHI,demo,0,demo,F007
+D0042,hoc phi ky nay bao nhieu tien 1 tin chi vay ad,HOC_PHI,demo,0,demo,
+D0043,Em đóng học phí trễ hạn thì có bị phạt không ạ,HOC_PHI,demo,0,demo,F007
+D0044,Đóng học phí qua ngân hàng nào được ạ,HOC_PHI,demo,0,demo,F008
+D0045,Em đã đóng tiền học rồi nhưng hệ thống vẫn báo nợ thì sao ạ,HOC_PHI,demo,0,demo,
+D0046,hp ki nay dong tre dc ko ad,HOC_PHI,demo,0,demo,
+D0047,Rút học phần thì có được hoàn lại học phí không ạ?,HOC_PHI,demo,0,demo,F019
+D0048,Làm sao để in biên lai đóng học phí ạ,HOC_PHI,demo,0,demo,F008
+D0049,Học phí học lại có giống học phí học lần đầu không ạ,HOC_PHI,demo,0,demo,
+D0050,Có thể đóng học phí làm nhiều đợt được không ạ,HOC_PHI,demo,0,demo,
+D0051,Em chuyển khoản học phí bị ghi sai nội dung thì phải làm gì?,HOC_PHI,demo,0,demo,F008
+D0052,Tiền học kỳ hè tính như thế nào ạ,HOC_PHI,demo,0,demo,
+D0053,Học phí ngành công nghệ thông tin năm nay tăng bao nhiêu vậy ạ,HOC_PHI,demo,0,demo,
+D0054,em chua dong hoc phi thi co bi khoa dang ky mon khong a,HOC_PHI,demo,0,demo,F007
+D0055,Đóng học phí bằng ví điện tử được không ạ,HOC_PHI,demo,0,demo,F008
+D0056,Khi nào có thông báo học phí học kỳ 2 vậy,HOC_PHI,demo,0,demo,F007
+D0057,Em đóng dư học phí thì có được hoàn lại không ạ,HOC_PHI,demo,0,demo,F019
+D0058,Học phí tính theo tín chỉ hay theo học kỳ ạ,HOC_PHI,demo,0,demo,
+D0059,nộp tiền học ở phòng nào vậy mn,HOC_PHI,demo,0,demo,F008
+D0060,Hóa đơn học phí điện tử xem ở đâu ạ,HOC_PHI,demo,0,demo,F008
+D0061,Hồ sơ xin miễn giảm học phí gồm những gì ạ?,HOC_BONG,demo,0,demo,F009
+D0062,Học bổng khuyến khích học tập xét theo điểm trung bình bao nhiêu?,HOC_BONG,demo,0,demo,F016
+D0063,Khi nào có danh sách nhận học bổng học kỳ trước vậy,HOC_BONG,demo,0,demo,F016
+D0064,Em là con thương binh thì có được giảm học phí không,HOC_BONG,demo,0,demo,F009
+D0065,Học bổng doanh nghiệp đăng ký ở đâu vậy mọi người,HOC_BONG,demo,0,demo,F017
+D0066,hoc bong loai gioi duoc bao nhieu tien vay a,HOC_BONG,demo,0,demo,F016
+D0067,Bao giờ học bổng được chuyển vào tài khoản ạ,HOC_BONG,demo,0,demo,
+D0068,Sinh viên có hoàn cảnh khó khăn xin trợ cấp ở đâu ạ,HOC_BONG,demo,0,demo,F018
+D0069,Điểm rèn luyện bao nhiêu thì được xét học bổng ạ,HOC_BONG,demo,0,demo,F016
+D0070,Em bị rớt một môn thì có còn được nhận học bổng không,HOC_BONG,demo,0,demo,
+D0071,hb ky nay khi nao co danh sach vay ad,HOC_BONG,demo,0,demo,F016
+D0072,Học bổng vượt khó nộp hồ sơ đến khi nào ạ,HOC_BONG,demo,0,demo,F017
+D0073,Sinh viên dân tộc thiểu số có được miễn học phí không ạ,HOC_BONG,demo,0,demo,F009
+D0074,Em mồ côi cha thì làm hồ sơ giảm học phí thế nào ạ,HOC_BONG,demo,0,demo,F009
+D0075,Có học bổng nào cho sinh viên năm nhất không ạ,HOC_BONG,demo,0,demo,
+D0076,Học bổng du học trao đổi của trường đăng ký ở đâu vậy,HOC_BONG,demo,0,demo,
+D0077,mien giam hoc phi nop o dau a,HOC_BONG,demo,0,demo,F009
+D0078,Học bổng có bị trừ thuế thu nhập không ạ,HOC_BONG,demo,0,demo,
+D0079,Danh sách miễn giảm học phí kỳ này có tên em chưa ạ,HOC_BONG,demo,0,demo,
+D0080,Em được học bổng rồi có được nhận thêm trợ cấp không ạ,HOC_BONG,demo,0,demo,F018
+D0081,Bao giờ phải nộp đề cương đồ án ạ?,DO_AN,demo,0,demo,
+D0082,Em muốn đổi giảng viên hướng dẫn đồ án có được không ạ,DO_AN,demo,0,demo,F011
+D0083,Điều kiện để được làm khóa luận tốt nghiệp là gì ạ?,DO_AN,demo,0,demo,F012
+D0084,dang ky de tai do an mon hoc o dau vay ad,DO_AN,demo,0,demo,F010
+D0085,Đồ án nhóm tối đa bao nhiêu thành viên ạ,DO_AN,demo,0,demo,
+D0086,Lịch bảo vệ khóa luận khi nào có ạ,DO_AN,demo,0,demo,
+D0087,Em nộp báo cáo đồ án trễ thì có bị trừ điểm không,DO_AN,demo,0,demo,
+D0088,Khóa luận cần bao nhiêu trang và trình bày theo mẫu nào ạ?,DO_AN,demo,0,demo,
+D0089,Ai là người chấm phản biện khóa luận vậy ạ,DO_AN,demo,0,demo,
+D0090,Em chưa tìm được giảng viên hướng dẫn thì làm sao,DO_AN,demo,0,demo,F011
+D0091,do an tot nghiep co duoc lam ca nhan khong a,DO_AN,demo,0,demo,
+D0092,Nộp file đồ án qua email hay qua hệ thống ạ,DO_AN,demo,0,demo,
+D0093,Em muốn đổi tên đề tài khóa luận thì làm thủ tục gì ạ,DO_AN,demo,0,demo,
+D0094,Điểm đồ án được tính như thế nào ạ,DO_AN,demo,0,demo,
+D0095,Hạn chót đăng ký đề tài khóa luận là khi nào vậy,DO_AN,demo,0,demo,F010
+D0096,Bảo vệ đồ án có cần làm slide không ạ,DO_AN,demo,0,demo,
+D0097,Em không đủ điều kiện làm khóa luận thì học môn thay thế nào?,DO_AN,demo,0,demo,F012
+D0098,Mẫu bìa báo cáo đồ án lấy ở đâu vậy ạ,DO_AN,demo,0,demo,
+D0099,gvhd khong tra loi email thi em phai lam sao a,DO_AN,demo,0,demo,F011
+D0100,Kiểm tra đạo văn khóa luận dùng phần mềm gì ạ,DO_AN,demo,0,demo,
+D0101,Cần bao nhiêu tín chỉ để được xét tốt nghiệp ạ?,QUY_CHE,demo,0,demo,F013
+D0102,GPA dưới 1.0 có bị cảnh báo học vụ không ạ,QUY_CHE,demo,0,demo,F014
+D0103,Em muốn bảo lưu kết quả học tập thì làm thủ tục gì?,QUY_CHE,demo,0,demo,F015
+D0104,Chuẩn đầu ra tiếng Anh của trường là bao nhiêu điểm IELTS ạ,QUY_CHE,demo,0,demo,F013
+D0105,Bị cảnh báo học vụ mấy lần thì bị buộc thôi học vậy,QUY_CHE,demo,0,demo,F014
+D0106,xep loai tot nghiep gioi can gpa bao nhieu a,QUY_CHE,demo,0,demo,
+D0107,Khi nào trường xét tốt nghiệp đợt tiếp theo ạ,QUY_CHE,demo,0,demo,
+D0108,Em học vượt để ra trường sớm được không ạ?,QUY_CHE,demo,0,demo,
+D0109,Thời gian học tối đa của chương trình đại học là mấy năm ạ,QUY_CHE,demo,0,demo,
+D0110,Điểm trung bình tích lũy được tính như thế nào ạ,QUY_CHE,demo,0,demo,
+D0111,Em muốn chuyển ngành thì cần điều kiện gì ạ,QUY_CHE,demo,0,demo,
+D0112,Bao giờ được nhận bằng tốt nghiệp sau khi xét ạ,QUY_CHE,demo,0,demo,
+D0113,Học cải thiện điểm thì lấy điểm cao nhất hay điểm lần sau ạ,QUY_CHE,demo,0,demo,
+D0114,chung chi tin hoc co bat buoc de tot nghiep khong ad,QUY_CHE,demo,0,demo,F013
+D0115,Em nghỉ học một học kỳ có bị xóa tên không ạ,QUY_CHE,demo,0,demo,
+D0116,Môn học tự chọn có tính vào điểm trung bình không,QUY_CHE,demo,0,demo,
+D0117,Bảo lưu tối đa được bao lâu vậy ạ,QUY_CHE,demo,0,demo,F015
+D0118,Điều kiện để học song ngành là gì ạ,QUY_CHE,demo,0,demo,
+D0119,Rớt môn bắt buộc nhiều lần thì có sao không ạ,QUY_CHE,demo,0,demo,
+D0120,Em thiếu chứng chỉ giáo dục quốc phòng thì có được xét tốt nghiệp không,QUY_CHE,demo,0,demo,F013
+D0121,Gần trường có quán cơm nào ngon không mọi người,KHAC,demo,0,demo,
+D0122,Xin giấy xác nhận sinh viên ở đâu ạ?,KHAC,demo,0,demo,
+D0123,Em bị mất thẻ sinh viên thì làm lại ở đâu,KHAC,demo,0,demo,
+D0124,bot oi ban ten gi vay,KHAC,demo,0,demo,
+D0125,Ký túc xá còn phòng trống không ạ,KHAC,demo,0,demo,
+D0126,Hôm nay trời có mưa không,KHAC,demo,0,demo,
+D0127,Wifi của trường mật khẩu là gì vậy,KHAC,demo,0,demo,
+D0128,cho minh hoi bai hat nay ten gi,KHAC,demo,0,demo,
+D0129,Thư viện mở cửa đến mấy giờ ạ,KHAC,demo,0,demo,
+D0130,Chào bạn,KHAC,demo,0,demo,
+D0131,Câu lạc bộ guitar tuyển thành viên khi nào vậy,KHAC,demo,0,demo,
+D0132,Em muốn gửi xe máy trong trường thì đăng ký vé tháng ở đâu,KHAC,demo,0,demo,
+D0133,Cảm ơn nhiều nha,KHAC,demo,0,demo,
+D0134,Ai biết chỗ sửa laptop uy tín gần trường không,KHAC,demo,0,demo,
+D0135,Trường có xe buýt đưa đón sinh viên không ạ,KHAC,demo,0,demo,
+D0136,Em quên mật khẩu email sinh viên thì làm sao ạ,KHAC,demo,0,demo,
+D0137,Căn tin bán đến mấy giờ vậy,KHAC,demo,0,demo,
+D0138,haha vui quá,KHAC,demo,0,demo,
+D0139,Tháng sau trường có tổ chức hội thao không ạ,KHAC,demo,0,demo,
+D0140,Làm sao để mượn phòng tự học nhóm ạ,KHAC,demo,0,demo,
+D0141,Bảo hiểm y tế sinh viên đóng ở đâu ạ,KHAC,demo,0,demo,
+D0142,Mình muốn tìm bạn cùng phòng trọ,KHAC,demo,0,demo,
+D0143,Đăng ký tham gia mùa hè xanh ở đâu vậy,KHAC,demo,0,demo,
+D0144,test test,KHAC,demo,0,demo,
+D0145,Thẻ sinh viên có dùng để đi xe buýt được không,KHAC,demo,0,demo,
