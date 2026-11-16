@@ -39,8 +39,9 @@ def test_gd1_phan_loai_chuyen_phong_ban_va_danh_gia(tmp_path):
     at.text_area[0].input("Khi nào có lịch thi lại môn Giải tích 1 ạ?")
     at.button[0].click().run()
     assert not at.exception
-    chi_so = {m.label: m.value for m in at.metric}
-    assert chi_so["Chuyển đến"] == config.phong_ban("LICH_THI")
+    pb = config.phong_ban("LICH_THI")
+    assert any(f"Chuyển đến: {pb}" in m.value for m in at.markdown)
+    assert any(config.lien_he(pb) in c.value for c in at.caption), "phải hiện phòng, điện thoại, website"
     assert at.info and not at.success
     log = _doc_log(tmp_path)
     assert len(log) == 1 and log.hanh_dong[0] == "chuyen_tiep" and log.chu_de[0] == "LICH_THI"
@@ -69,7 +70,7 @@ def test_dau_vao_khong_hop_le_khong_ghi_nhat_ky(tmp_path):
 
 def test_quan_tri_can_mat_khau(tmp_path):
     nk = NhatKyCSV(tmp_path / "log.csv")
-    for ma, hanh_dong, chu_de, pb in [("a1", "chuyen_tiep", "HOC_PHI", "Phòng Tài chính"),
+    for ma, hanh_dong, chu_de, pb in [("a1", "chuyen_tiep", "HOC_PHI", "Phòng Kế hoạch - Tài chính"),
                                       ("a2", "chuyen_tiep", "KHAC", "Trợ lý khoa"),
                                       ("a3", "can_phan_loai", "QUY_CHE", "Trợ lý khoa")]:
         nk.ghi(tao_dong(ma, f"câu hỏi {ma}", KetQua(hanh_dong=hanh_dong, chu_de=chu_de, do_tin_cay=0.5,

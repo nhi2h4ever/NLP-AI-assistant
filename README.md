@@ -7,14 +7,14 @@ Hệ thống AI dùng **Machine Learning** (TF-IDF + Naive Bayes / Logistic Regr
 | **1 (hiện tại)** | `False` | Phân loại câu hỏi vào 7 chủ đề → chuyển đến phòng ban phụ trách. Câu mô hình chưa chắc chắn (độ tin cậy < τ) được chuyển cho trợ lý khoa phân loại thủ công. |
 | 2 | `True` | Thêm trả lời tự động bằng kho FAQ (cosine similarity trên TF-IDF). Cần file `data/faq.csv`. |
 
-**Chủ đề → phòng ban** (sửa tên phòng ban trong `config.py` cho đúng trường):
+**Chủ đề → phòng ban** của Trường Đại học Bách khoa – ĐH Đà Nẵng. Tên phòng ban và thông tin liên hệ (phòng, điện thoại, website) hiển thị cho sinh viên được khai báo trong `config.PHONG_BAN`; nhóm điền thêm thông tin của Văn phòng Khoa và Trợ lý khoa:
 
 | Mã | Chủ đề | Phòng ban |
 |---|---|---|
 | `LICH_HOC` | Lịch học & đăng ký học phần | Phòng Đào tạo |
-| `LICH_THI` | Lịch thi & điểm thi | Phòng Khảo thí |
-| `HOC_PHI` | Học phí (mức thu, hạn đóng, cách đóng, hoàn tiền) | Phòng Tài chính |
-| `HOC_BONG` | Học bổng, miễn giảm học phí, trợ cấp | Phòng Công tác Sinh viên |
+| `LICH_THI` | Lịch thi & điểm thi | Phòng Khảo thí và Đảm bảo chất lượng giáo dục |
+| `HOC_PHI` | Học phí (mức thu, hạn đóng, cách đóng, hoàn tiền) | Phòng Kế hoạch - Tài chính |
+| `HOC_BONG` | Học bổng, miễn giảm học phí, trợ cấp | Phòng Công tác sinh viên |
 | `DO_AN` | Đồ án & khóa luận | Văn phòng Khoa |
 | `QUY_CHE` | Quy chế & tốt nghiệp | Phòng Đào tạo |
 | `KHAC` | Ngoài phạm vi | Trợ lý khoa |
@@ -65,7 +65,7 @@ FAQ_ROUTER_DEMO=1 .venv/bin/streamlit run app.py
 ## Quy trình làm với dữ liệu thật
 
 1. **Thu thập và gán nhãn** câu hỏi thật (Google Form, nhóm Facebook, trợ lý khoa…) vào `data/questions.csv` theo mẫu `data/templates/questions_template.csv`:
-   - `id`: mã duy nhất; `text`: câu hỏi; `label`: một trong 7 mã nhãn. Câu về **miễn giảm học phí** gán `HOC_BONG` (do Phòng Công tác SV xét), không gán `HOC_PHI`.
+   - `id`: mã duy nhất; `text`: câu hỏi; `label`: một trong 7 mã nhãn. Câu về **miễn giảm học phí** gán `HOC_BONG` (do Phòng Công tác sinh viên xét), không gán `HOC_PHI`.
    - `source`: `form` / `facebook` / `staff` (câu hỏi thật, được vào tập test), `team` (nhóm tự viết) hoặc `faq` (lấy từ tài liệu trường) — hai loại sau chỉ dùng để huấn luyện.
    - `multi_intent` (0/1), `annotator`, `faq_id` (chỉ cần ở giai đoạn 2).
 2. **Đo độ đồng thuận gán nhãn:** 2 người gán cùng khoảng 100 câu vào `data/kappa_check.csv` (mẫu `data/templates/kappa_template.csv`).

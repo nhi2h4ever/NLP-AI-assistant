@@ -65,10 +65,12 @@ if "ket_qua" in st.session_state:
     if kq.hanh_dong == LOI_DAU_VAO:
         st.warning(kq.thong_bao)
     else:
-        c1, c2 = st.columns(2)
-        c1.metric("Chủ đề", kq.ten_chu_de if kq.hanh_dong != CAN_PHAN_LOAI else "Chưa xác định")
-        c2.metric("Chuyển đến", kq.phong_ban)
+        st.metric("Chủ đề", kq.ten_chu_de if kq.hanh_dong != CAN_PHAN_LOAI else "Chưa xác định")
         st.progress(min(kq.do_tin_cay, 1.0), text=f"Độ tin cậy: {kq.do_tin_cay:.0%}")
+        st.markdown(f"#### 📨 Chuyển đến: {kq.phong_ban}")
+        lien_he = config.lien_he(kq.phong_ban)
+        if lien_he:
+            st.caption(f"📍 Liên hệ trực tiếp: {lien_he}")
         if kq.hanh_dong == TRA_LOI:
             st.success(kq.cau_tra_loi)
             st.caption(f"Nguồn: {kq.nguon} · Cập nhật: {kq.cap_nhat}")

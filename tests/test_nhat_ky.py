@@ -5,7 +5,7 @@ from router import KetQua
 
 
 def _kq(**kw):
-    mac_dinh = dict(hanh_dong="chuyen_tiep", chu_de="HOC_PHI", do_tin_cay=0.42, phong_ban="Phòng Tài chính")
+    mac_dinh = dict(hanh_dong="chuyen_tiep", chu_de="HOC_PHI", do_tin_cay=0.42, phong_ban="Phòng Kế hoạch - Tài chính")
     return KetQua(**{**mac_dinh, **kw})
 
 

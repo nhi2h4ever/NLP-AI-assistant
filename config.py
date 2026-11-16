@@ -28,14 +28,26 @@ FAQ_PATH = (DATA_DIR / "sample" / "faq_sample.csv") if DEMO else (DATA_DIR / "fa
 # Độ dài tối đa của một câu hỏi (ký tự)
 MAX_LEN = 500
 
-# Mã nhãn -> (tên hiển thị, phòng ban mặc định khi chuyển tiếp).
-# Thay tên phòng ban cho đúng cơ cấu của trường.
+# Phòng ban của Trường Đại học Bách khoa – Đại học Đà Nẵng (theo website dut.udn.vn).
+# Tên phòng ban -> thông tin liên hệ hiển thị cho sinh viên khi câu hỏi được chuyển đến.
+PHONG_BAN = {
+    "Phòng Đào tạo": {"phong": "A123", "dien_thoai": "0236.3842145", "web": "http://dut.udn.vn/Phong/DaoTao"},
+    "Phòng Khảo thí và Đảm bảo chất lượng giáo dục": {
+        "phong": "S03", "dien_thoai": "0236.3737931", "web": "http://dut.udn.vn/Phong/QualityAssurance"},
+    "Phòng Kế hoạch - Tài chính": {"phong": "A120", "dien_thoai": "0236.3841660", "web": "http://dut.udn.vn/Phong/TaiChinh"},
+    "Phòng Công tác sinh viên": {"phong": "A108", "dien_thoai": "0236.3738268", "web": "http://dut.udn.vn/Phong/Sinhvien"},
+    # Hai đơn vị dưới đây thuộc từng khoa — nhóm điền phòng/điện thoại của khoa mình.
+    "Văn phòng Khoa": {"phong": "", "dien_thoai": "", "web": ""},
+    "Trợ lý khoa": {"phong": "", "dien_thoai": "", "web": ""},
+}
+
+# Mã nhãn -> (tên hiển thị, phòng ban phụ trách — phải là một khóa trong PHONG_BAN).
 NHAN = {
     "LICH_HOC": ("Lịch học & đăng ký học phần", "Phòng Đào tạo"),
-    "LICH_THI": ("Lịch thi & điểm thi", "Phòng Khảo thí"),
-    "HOC_PHI": ("Học phí", "Phòng Tài chính"),
-    # Gồm cả MIỄN GIẢM học phí và trợ cấp — do Phòng Công tác Sinh viên xét, không phải Phòng Tài chính.
-    "HOC_BONG": ("Học bổng & miễn giảm học phí", "Phòng Công tác Sinh viên"),
+    "LICH_THI": ("Lịch thi & điểm thi", "Phòng Khảo thí và Đảm bảo chất lượng giáo dục"),
+    "HOC_PHI": ("Học phí", "Phòng Kế hoạch - Tài chính"),
+    # Gồm cả MIỄN GIẢM học phí và trợ cấp — do Phòng Công tác sinh viên xét, không phải Phòng Kế hoạch - Tài chính.
+    "HOC_BONG": ("Học bổng & miễn giảm học phí", "Phòng Công tác sinh viên"),
     "DO_AN": ("Đồ án & khóa luận", "Văn phòng Khoa"),
     "QUY_CHE": ("Quy chế & tốt nghiệp", "Phòng Đào tạo"),
     "KHAC": ("Khác (ngoài phạm vi)", "Trợ lý khoa"),
@@ -46,10 +58,23 @@ NHAN_KHAC = "KHAC"
 # thay vì đoán phòng ban và có thể chuyển nhầm.
 PHONG_BAN_XEM_LAI = "Trợ lý khoa"
 
+_thieu = ({pb for _, pb in NHAN.values()} | {PHONG_BAN_XEM_LAI}) - set(PHONG_BAN)
+if _thieu:
+    raise ValueError(f"Phòng ban chưa khai báo trong PHONG_BAN: {_thieu}")
+
 
 def phong_ban(nhan: str) -> str:
     """Phòng ban phụ trách một chủ đề."""
     return NHAN[nhan][1]
+
+
+def lien_he(ten_phong_ban: str) -> str:
+    """Chuỗi liên hệ của phòng ban, ví dụ 'Phòng A123 · ĐT 0236.3842145 · http://...'.
+    Rỗng nếu chưa có thông tin."""
+    tt = PHONG_BAN.get(ten_phong_ban, {})
+    phan = [f"Phòng {tt['phong']}" if tt.get("phong") else "",
+            f"ĐT {tt['dien_thoai']}" if tt.get("dien_thoai") else "", tt.get("web", "")]
+    return " · ".join(p for p in phan if p)
 
 # Nguồn dữ liệu được phép đưa vào tập test (chỉ câu hỏi thật).
 # "team" (nhóm tự viết), "faq" (câu hỏi lấy từ kho FAQ) và "log" (nhật ký) không vào tập test gốc.

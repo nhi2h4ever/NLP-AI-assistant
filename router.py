@@ -63,6 +63,9 @@ def doc_faq(path) -> pd.DataFrame:
     sai = sorted(set(faq.label) - set(config.NHAN))
     if sai:
         raise ValueError(f"Kho FAQ {path} có nhãn không hợp lệ: {sai}")
+    pb_sai = sorted(set(faq.department) - set(config.PHONG_BAN) - {""})
+    if pb_sai:
+        raise ValueError(f"Kho FAQ {path} có phòng ban không có trong config.PHONG_BAN: {pb_sai}")
     return faq
 
 
