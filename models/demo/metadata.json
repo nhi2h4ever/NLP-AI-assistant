@@ -29,7 +29,7 @@
     "Precision xử lý tự động": 0.95,
     "Macro-F1 câu không dấu": 0.863718820861678
   },
-  "thoi_gian_ms_moi_cau": 1.8413741601398215,
-  "ngay_huan_luyen": "2026-11-16 15:38",
+  "thoi_gian_ms_moi_cau": 1.7167024999798741,
+  "ngay_huan_luyen": "2026-11-18 08:04",
   "scikit_learn": "1.9.1"
 }

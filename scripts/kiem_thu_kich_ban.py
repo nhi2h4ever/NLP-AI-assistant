@@ -36,7 +36,7 @@ KICH_BAN = [
     ("Câu dài, nhiều câu", DOAN_DAI,
      f"DO_AN → {config.phong_ban('DO_AN')}", den("DO_AN")),
     ("Câu có hai ý", "Học phí bao nhiêu và khi nào thi?",
-     "HOC_PHI hoặc LICH_THI, hoặc chuyển trợ lý khoa nếu chưa chắc",
+     "HOC_PHI hoặc LICH_THI, hoặc chuyển P.CTSV nếu chưa chắc",
      lambda k: k.chu_de in {"HOC_PHI", "LICH_THI"} or k.hanh_dong == CAN_PHAN_LOAI),
     ("Ngoài phạm vi", "Gần trường có quán cơm nào ngon?", f"KHAC → {XEM_LAI}",
      lambda k: k.chu_de == "KHAC" and k.phong_ban == XEM_LAI),

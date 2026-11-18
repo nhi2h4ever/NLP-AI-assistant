@@ -76,10 +76,12 @@ if "ket_qua" in st.session_state:
             st.caption(f"Nguồn: {kq.nguon} · Cập nhật: {kq.cap_nhat}")
         else:
             st.info(f"{kq.thong_bao} Mã yêu cầu: **{ma}**")
+            st.caption(f"⏱ Thời hạn phản hồi: {kq.thoi_han} "
+                       f"(theo Quy trình {config.QUY_TRINH} – Tiếp nhận và giải quyết thắc mắc cho sinh viên).")
 
         danh_gia = st.session_state.setdefault("da_danh_gia", {})
         if kq.hanh_dong == CAN_PHAN_LOAI:
-            pass  # chưa có chủ đề để sinh viên đánh giá; trợ lý khoa sẽ phân loại
+            pass  # chưa có chủ đề để sinh viên đánh giá; chuyên viên P.CTSV sẽ phân loại
         elif ma in danh_gia:
             st.caption("Cảm ơn bạn đã đánh giá!")
         else:

@@ -42,6 +42,7 @@ def test_gd1_phan_loai_chuyen_phong_ban_va_danh_gia(tmp_path):
     pb = config.phong_ban("LICH_THI")
     assert any(f"Chuyển đến: {pb}" in m.value for m in at.markdown)
     assert any(config.lien_he(pb) in c.value for c in at.caption), "phải hiện phòng, điện thoại, website"
+    assert any("3 ngày làm việc" in c.value and config.QUY_TRINH in c.value for c in at.caption), "phải hiện thời hạn theo QT_11_CTSV"
     assert at.info and not at.success
     log = _doc_log(tmp_path)
     assert len(log) == 1 and log.hanh_dong[0] == "chuyen_tiep" and log.chu_de[0] == "LICH_THI"
@@ -71,8 +72,8 @@ def test_dau_vao_khong_hop_le_khong_ghi_nhat_ky(tmp_path):
 def test_quan_tri_can_mat_khau(tmp_path):
     nk = NhatKyCSV(tmp_path / "log.csv")
     for ma, hanh_dong, chu_de, pb in [("a1", "chuyen_tiep", "HOC_PHI", "Phòng Kế hoạch - Tài chính"),
-                                      ("a2", "chuyen_tiep", "KHAC", "Trợ lý khoa"),
-                                      ("a3", "can_phan_loai", "QUY_CHE", "Trợ lý khoa")]:
+                                      ("a2", "chuyen_tiep", "KHAC", "Phòng Công tác sinh viên"),
+                                      ("a3", "can_phan_loai", "QUY_CHE", "Phòng Công tác sinh viên")]:
         nk.ghi(tao_dong(ma, f"câu hỏi {ma}", KetQua(hanh_dong=hanh_dong, chu_de=chu_de, do_tin_cay=0.5,
                                                      phong_ban=pb), "test"))
     at = _app("pages/1_Quan_tri.py", tmp_path, admin_password="mk-test")

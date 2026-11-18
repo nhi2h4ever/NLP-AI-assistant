@@ -16,8 +16,8 @@ COT_FAQ = ["faq_id", "label", "question", "variants", "answer", "source", "updat
 _CO_CHU = re.compile(r"[^\W\d_]")  # có ít nhất một chữ cái
 
 # Hành động của hệ thống với một câu hỏi
-CHUYEN_TIEP = "chuyen_tiep"        # đủ tin cậy: chuyển đến phòng ban phụ trách chủ đề (KHAC -> trợ lý khoa)
-CAN_PHAN_LOAI = "can_phan_loai"    # chưa đủ tin cậy: chuyển trợ lý khoa phân loại thủ công
+CHUYEN_TIEP = "chuyen_tiep"        # đủ tin cậy: chuyển đến phòng ban phụ trách chủ đề (KHAC -> P.CTSV)
+CAN_PHAN_LOAI = "can_phan_loai"    # chưa đủ tin cậy: chuyển P.CTSV phân loại thủ công (QT_11_CTSV, bước 2)
 TRA_LOI = "tra_loi"                # giai đoạn 2: trả lời tự động bằng kho FAQ
 LOI_DAU_VAO = "loi_dau_vao"        # câu hỏi rỗng / quá dài / không có chữ
 
@@ -37,6 +37,7 @@ class KetQua:
     faq_id: str = ""
     do_tuong_dong: float = 0.0
     thoi_gian_ms: float = 0.0
+    thoi_han: str = ""                  # thời hạn phản hồi theo QT_11_CTSV
 
 
 def kiem_tra_dau_vao(cau_hoi: str):
@@ -132,17 +133,19 @@ class Router:
         nhan, tin_cay = str(lop[thu_tu[0]]), float(proba[thu_tu[0]])
         ten, phong_ban = config.NHAN[nhan]
         kq = KetQua(hanh_dong=CHUYEN_TIEP, chu_de=nhan, ten_chu_de=ten, do_tin_cay=tin_cay,
-                    top3=[(str(lop[i]), float(proba[i])) for i in thu_tu[:3]], phong_ban=phong_ban)
+                    top3=[(str(lop[i]), float(proba[i])) for i in thu_tu[:3]], phong_ban=phong_ban,
+                    thoi_han=config.THOI_HAN_PHAN_HOI)
 
         # Chính sách quyết định
         if tin_cay < self.nguong_tin_cay:
             kq.hanh_dong = CAN_PHAN_LOAI
             kq.phong_ban = config.PHONG_BAN_XEM_LAI
             kq.thong_bao = (f"Hệ thống chưa chắc chắn câu hỏi thuộc chủ đề nào. Câu hỏi đã được chuyển đến "
-                            f"{config.PHONG_BAN_XEM_LAI} để phân loại và hỗ trợ.")
+                            f"{config.PHONG_BAN_XEM_LAI} để phân loại và chuyển đến đơn vị phụ trách.")
         elif nhan == config.NHAN_KHAC:
+            kq.thoi_han = config.THOI_HAN_PHAN_HOI_KHAC
             kq.thong_bao = (f"Câu hỏi nằm ngoài các chủ đề học vụ hệ thống hỗ trợ, đã được chuyển đến "
-                            f"{phong_ban}. Cán bộ sẽ phản hồi cho bạn.")
+                            f"{phong_ban} để tư vấn, hướng dẫn.")
         elif not self.tra_loi_tu_dong:
             kq.thong_bao = f"Câu hỏi đã được chuyển đến {phong_ban}. Cán bộ sẽ phản hồi cho bạn."
         else:

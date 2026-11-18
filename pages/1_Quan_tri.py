@@ -1,4 +1,4 @@
-"""Trang Quản trị cho trợ lý khoa: câu hỏi theo phòng ban, câu cần phân loại thủ công, thống kê,
+"""Trang Quản trị cho chuyên viên Phòng Công tác sinh viên (đơn vị chủ trì theo QT_11_CTSV): câu hỏi theo phòng ban, câu cần phân loại thủ công, thống kê,
 sửa nhãn, xuất dữ liệu huấn luyện lại."""
 import hmac
 
@@ -81,7 +81,7 @@ with t3:
 
 # ---------------- Câu cần phân loại thủ công
 st.subheader("Câu hỏi cần phân loại thủ công")
-st.caption("Mô hình chưa đủ tin cậy (độ tin cậy < τ). Trợ lý khoa xác định chủ đề, chuyển đến phòng ban "
+st.caption("Mô hình chưa đủ tin cậy (độ tin cậy < τ). Chuyên viên P.CTSV xác định chủ đề, chuyển đến phòng ban "
            "phù hợp và điền “Nhãn đúng” ở bảng bên dưới.")
 can = df[df.hanh_dong == CAN_PHAN_LOAI]
 if can.empty:

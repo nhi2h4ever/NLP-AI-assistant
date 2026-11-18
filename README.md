@@ -4,10 +4,10 @@ Hệ thống AI dùng **Machine Learning** (TF-IDF + Naive Bayes / Logistic Regr
 
 | Giai đoạn | `config.TRA_LOI_TU_DONG` | Hệ thống làm gì |
 |---|---|---|
-| **1 (hiện tại)** | `False` | Phân loại câu hỏi vào 7 chủ đề → chuyển đến phòng ban phụ trách. Câu mô hình chưa chắc chắn (độ tin cậy < τ) được chuyển cho trợ lý khoa phân loại thủ công. |
+| **1 (hiện tại)** | `False` | Phân loại câu hỏi vào 7 chủ đề → chuyển đến phòng ban phụ trách. Câu mô hình chưa chắc chắn (độ tin cậy < τ) được chuyển về Phòng Công tác sinh viên phân loại thủ công. |
 | 2 | `True` | Thêm trả lời tự động bằng kho FAQ (cosine similarity trên TF-IDF). Cần file `data/faq.csv`. |
 
-**Chủ đề → phòng ban** của Trường Đại học Bách khoa – ĐH Đà Nẵng. Tên phòng ban và thông tin liên hệ (phòng, điện thoại, website) hiển thị cho sinh viên được khai báo trong `config.PHONG_BAN`; nhóm điền thêm thông tin của Văn phòng Khoa và Trợ lý khoa:
+**Chủ đề → phòng ban** của Trường Đại học Bách khoa – ĐH Đà Nẵng. Tên phòng ban và thông tin liên hệ (phòng, điện thoại, website) hiển thị cho sinh viên được khai báo trong `config.PHONG_BAN`; nhóm điền thêm thông tin của Văn phòng Khoa:
 
 | Mã | Chủ đề | Phòng ban |
 |---|---|---|
@@ -17,7 +17,17 @@ Hệ thống AI dùng **Machine Learning** (TF-IDF + Naive Bayes / Logistic Regr
 | `HOC_BONG` | Học bổng, miễn giảm học phí, trợ cấp | Phòng Công tác sinh viên |
 | `DO_AN` | Đồ án & khóa luận | Văn phòng Khoa |
 | `QUY_CHE` | Quy chế & tốt nghiệp | Phòng Đào tạo |
-| `KHAC` | Ngoài phạm vi | Trợ lý khoa |
+| `KHAC` | Ngoài phạm vi | Phòng Công tác sinh viên |
+
+## Căn cứ: Quy trình QT_11_CTSV
+
+Hệ thống bám theo Quy trình *Tiếp nhận và giải quyết thắc mắc cho sinh viên* (QT_11_CTSV) của Trường. Phòng Công tác sinh viên **chủ trì** cả 3 bước, các Khoa và Phòng ban **phối hợp**:
+
+| Bước | Quy trình hiện tại (thủ công) | Thời gian | Trong hệ thống |
+|---|---|---|---|
+| 1. Tiếp nhận | Trực tiếp tại bộ phận một cửa, email, trang fr.dut.udn.vn | Trong ngày | Trang Hỏi đáp nhận câu hỏi, ghi nhật ký |
+| 2. Tổng hợp, phân loại | Chuyên viên P.CTSV đọc, phân loại theo đơn vị liên quan, chuyển tiếp | 1 ngày sau khi nhận | **Mô hình ML phân loại và chuyển ngay**; câu chưa chắc chắn → chuyên viên P.CTSV |
+| 3. Thông báo kết quả | Chuyên viên trả lời qua email / fr.dut.udn.vn | 1–3 ngày | Sinh viên được báo phòng ban, liên hệ và thời hạn phản hồi (3 ngày làm việc; câu ngoài phạm vi 1–2 ngày) |
 
 ## Cấu trúc thư mục
 
@@ -28,7 +38,7 @@ training.py            các hàm ML pipeline (Step 1–2)
 router.py              mô hình + chính sách quyết định (+ tìm FAQ ở giai đoạn 2)
 nhat_ky.py             nhật ký câu hỏi: CSV trên máy hoặc Google Sheets
 app.py                 Trang Hỏi đáp cho sinh viên (Streamlit)
-pages/1_Quan_tri.py    Trang Quản trị cho trợ lý khoa
+pages/1_Quan_tri.py    Trang Quản trị cho chuyên viên Phòng Công tác sinh viên
 notebooks/train.ipynb  notebook huấn luyện: dữ liệu → so sánh mô hình → tinh chỉnh → đánh giá → lưu model
 scripts/kiem_thu_kich_ban.py  13 kịch bản kiểm thử hệ thống (Step 3)
 tests/                 kiểm thử tự động (pytest)
@@ -64,7 +74,7 @@ FAQ_ROUTER_DEMO=1 .venv/bin/streamlit run app.py
 
 ## Quy trình làm với dữ liệu thật
 
-1. **Thu thập và gán nhãn** câu hỏi thật (Google Form, nhóm Facebook, trợ lý khoa…) vào `data/questions.csv` theo mẫu `data/templates/questions_template.csv`:
+1. **Thu thập và gán nhãn** câu hỏi thật (Google Form, nhóm Facebook, câu hỏi P.CTSV đã nhận qua email / fr.dut.udn.vn…) vào `data/questions.csv` theo mẫu `data/templates/questions_template.csv`:
    - `id`: mã duy nhất; `text`: câu hỏi; `label`: một trong 7 mã nhãn. Câu về **miễn giảm học phí** gán `HOC_BONG` (do Phòng Công tác sinh viên xét), không gán `HOC_PHI`.
    - `source`: `form` / `facebook` / `staff` (câu hỏi thật, được vào tập test), `team` (nhóm tự viết) hoặc `faq` (lấy từ tài liệu trường) — hai loại sau chỉ dùng để huấn luyện.
    - `multi_intent` (0/1), `annotator`, `faq_id` (chỉ cần ở giai đoạn 2).
@@ -96,7 +106,7 @@ FAQ_ROUTER_DEMO=1 .venv/bin/streamlit run app.py
    - Chia sẻ Sheet (quyền Editor) cho email của service account.
    - Dán `sheet_url` và khóa JSON vào mục `[gcp_service_account]`.
    - Phải dùng Google Sheets vì file ghi trên máy chủ Streamlit Cloud có thể mất khi app khởi động lại.
-4. Gửi link app cho sinh viên dùng thử. Trợ lý khoa vào trang **Quan tri** để xem câu hỏi theo phòng ban, xử lý các câu cần phân loại thủ công và điền "Nhãn đúng".
+4. Gửi link app cho sinh viên dùng thử. Chuyên viên P.CTSV vào trang **Quan tri** để xem câu hỏi theo phòng ban, xử lý các câu cần phân loại thủ công và điền "Nhãn đúng".
 
 ## Huấn luyện lại (v1 → v2)
 

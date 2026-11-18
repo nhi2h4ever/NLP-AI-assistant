@@ -38,17 +38,26 @@ def test_gd1_chuyen_dung_phong_ban(router_gd1, cau_hoi, nhan):
     assert kq.cau_tra_loi == ""
 
 
-def test_gd1_khac_chuyen_tro_ly_khoa(router_gd1):
+def test_gd1_khac_chuyen_pctsv(router_gd1):
+    """QT_11_CTSV: thắc mắc ngoài thủ tục hành chính / học tập do chuyên viên P.CTSV tư vấn trong 1–2 ngày."""
     kq = router_gd1.xu_ly("Gần trường có quán cơm nào ngon không mọi người")
     assert kq.chu_de == config.NHAN_KHAC and kq.hanh_dong == CHUYEN_TIEP
-    assert kq.phong_ban == config.phong_ban(config.NHAN_KHAC)
+    assert kq.phong_ban == config.DON_VI_CHU_TRI == "Phòng Công tác sinh viên"
+    assert kq.thoi_han == config.THOI_HAN_PHAN_HOI_KHAC
 
 
-def test_do_tin_cay_thap_thi_phan_loai_thu_cong(router_gd1):
+def test_do_tin_cay_thap_thi_pctsv_phan_loai_thu_cong(router_gd1):
+    """QT_11_CTSV bước 2: P.CTSV tổng hợp, phân loại khi hệ thống chưa chắc chắn."""
     router_gd1.nguong_tin_cay = 1.01
     kq = router_gd1.xu_ly("Hạn đóng học phí học kỳ này là ngày mấy ạ?")
     assert kq.hanh_dong == CAN_PHAN_LOAI
-    assert kq.phong_ban == config.PHONG_BAN_XEM_LAI
+    assert kq.phong_ban == config.DON_VI_CHU_TRI
+    assert kq.thoi_han == config.THOI_HAN_PHAN_HOI
+
+
+def test_chuyen_phong_ban_co_thoi_han_3_ngay(router_gd1):
+    kq = router_gd1.xu_ly("Khi nào có lịch thi lại môn Giải tích 1 ạ?")
+    assert kq.hanh_dong == CHUYEN_TIEP and kq.thoi_han == "trong 3 ngày làm việc"
 
 
 def test_top3_giam_dan(router_gd1):

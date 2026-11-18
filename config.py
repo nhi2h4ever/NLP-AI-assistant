@@ -36,10 +36,15 @@ PHONG_BAN = {
         "phong": "S03", "dien_thoai": "0236.3737931", "web": "http://dut.udn.vn/Phong/QualityAssurance"},
     "Phòng Kế hoạch - Tài chính": {"phong": "A120", "dien_thoai": "0236.3841660", "web": "http://dut.udn.vn/Phong/TaiChinh"},
     "Phòng Công tác sinh viên": {"phong": "A108", "dien_thoai": "0236.3738268", "web": "http://dut.udn.vn/Phong/Sinhvien"},
-    # Hai đơn vị dưới đây thuộc từng khoa — nhóm điền phòng/điện thoại của khoa mình.
+    # Thuộc từng khoa — nhóm điền phòng/điện thoại của khoa mình.
     "Văn phòng Khoa": {"phong": "", "dien_thoai": "", "web": ""},
-    "Trợ lý khoa": {"phong": "", "dien_thoai": "", "web": ""},
 }
+
+# Theo Quy trình QT_11_CTSV "Tiếp nhận và giải quyết thắc mắc cho sinh viên":
+# Phòng Công tác sinh viên CHỦ TRÌ tiếp nhận, tổng hợp, phân loại câu hỏi và chuyển đến đơn vị chức năng;
+# các Khoa, Phòng ban PHỐI HỢP trả lời. Hệ thống tự động hóa bước 2 (tổng hợp, phân loại).
+DON_VI_CHU_TRI = "Phòng Công tác sinh viên"
+QUY_TRINH = "QT_11_CTSV"
 
 # Mã nhãn -> (tên hiển thị, phòng ban phụ trách — phải là một khóa trong PHONG_BAN).
 NHAN = {
@@ -50,13 +55,19 @@ NHAN = {
     "HOC_BONG": ("Học bổng & miễn giảm học phí", "Phòng Công tác sinh viên"),
     "DO_AN": ("Đồ án & khóa luận", "Văn phòng Khoa"),
     "QUY_CHE": ("Quy chế & tốt nghiệp", "Phòng Đào tạo"),
-    "KHAC": ("Khác (ngoài phạm vi)", "Trợ lý khoa"),
+    # QT_11_CTSV: thắc mắc không liên quan thủ tục hành chính / học tập do chuyên viên P.CTSV tư vấn, hướng dẫn.
+    "KHAC": ("Khác (ngoài phạm vi)", DON_VI_CHU_TRI),
 }
 NHAN_KHAC = "KHAC"
 
-# Câu hỏi mô hình CHƯA CHẮC CHẮN (độ tin cậy < τ) được chuyển về đây để phân loại thủ công,
-# thay vì đoán phòng ban và có thể chuyển nhầm.
-PHONG_BAN_XEM_LAI = "Trợ lý khoa"
+# Câu hỏi mô hình CHƯA CHẮC CHẮN (độ tin cậy < τ) được chuyển về đơn vị chủ trì để chuyên viên
+# phân loại thủ công và chuyển tiếp (đúng bước 2 của QT_11_CTSV), thay vì đoán và có thể chuyển nhầm.
+PHONG_BAN_XEM_LAI = DON_VI_CHU_TRI
+
+# Thời hạn phản hồi hiển thị cho sinh viên (QT_11_CTSV, bước 3): câu hỏi gửi qua trang trực tuyến
+# được phản hồi trong 3 ngày làm việc; thắc mắc không liên quan thủ tục hành chính / học tập: 1–2 ngày làm việc.
+THOI_HAN_PHAN_HOI = "trong 3 ngày làm việc"
+THOI_HAN_PHAN_HOI_KHAC = "trong 1–2 ngày làm việc"
 
 _thieu = ({pb for _, pb in NHAN.values()} | {PHONG_BAN_XEM_LAI}) - set(PHONG_BAN)
 if _thieu:

@@ -257,7 +257,7 @@ def _dung(du_doan, y, theo_phong_ban: bool):
 
 def chon_nguong(oof: np.ndarray, lop: np.ndarray, y, muc_tieu=0.9, theo_phong_ban=True):
     """Chọn τ nhỏ nhất sao cho precision của các câu được xử lý tự động (độ tin cậy ≥ τ, chủ đề ≠ KHAC)
-    đạt ≥ muc_tieu. Câu có độ tin cậy < τ sẽ được chuyển trợ lý khoa phân loại thủ công."""
+    đạt ≥ muc_tieu. Câu có độ tin cậy < τ sẽ được chuyển Phòng Công tác sinh viên phân loại thủ công."""
     y = np.asarray(y)
     du_doan, tin_cay = lop[oof.argmax(1)], oof.max(1)
     dung = _dung(du_doan, y, theo_phong_ban)
