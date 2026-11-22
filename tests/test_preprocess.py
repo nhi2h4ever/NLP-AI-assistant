@@ -9,6 +9,11 @@ def test_an_danh_thay_thong_tin_ca_nhan():
     assert "21520001" not in kq and "0912345678" not in kq and "gmail" not in kq
 
 
+def test_an_danh_mssv_co_chu_va_khong_dong_cham_ma_lop():
+    kq = an_danh("161A080509 đã đóng học phí, lớp 20TCLC_DT1, môn IT004.E22.1, năm 2016-2017")
+    assert kq.startswith("<mssv>") and "20TCLC_DT1" in kq and "IT004.E22.1" in kq and "2016-2017" in kq
+
+
 def test_chuan_hoa_unicode_nfc():
     to_hop = unicodedata.normalize("NFD", "học phí")
     assert chuan_hoa(to_hop) == "học phí"

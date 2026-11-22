@@ -43,3 +43,28 @@ def test_chon_mo_hinh_uu_tien_lr():
     assert T.chon_mo_hinh(bang)[0] == "Logistic Regression"
     bang.loc[2, "Macro-F1 (CV)"] = 0.90
     assert T.chon_mo_hinh(bang)[0] == "Linear SVM"
+
+
+def test_kiem_dinh_cheo_giu_bien_the_cung_nhom_trong_mot_fold(du_lieu_mau):
+    df = du_lieu_mau.copy()
+    df["nhom"] = [f"g{i // 3}" for i in range(len(df))]  # mỗi nhóm 3 câu
+    for tr, va in T.chia_fold(df, so_fold=5, seed=1):
+        assert not set(df.nhom.iloc[tr]) & set(df.nhom.iloc[va])
+
+
+def test_doc_du_lieu_nhom_trong_thi_moi_cau_mot_nhom(tmp_path):
+    pd.DataFrame({"id": ["a", "b"], "text": ["học phí bao nhiêu", "lịch thi khi nào"],
+                  "label": ["HOC_PHI", "LICH_THI"], "source": ["form", "form"]}).to_csv(tmp_path / "q.csv", index=False)
+    df = T.doc_du_lieu(tmp_path / "q.csv")
+    assert list(df.nhom) == ["a", "b"]
+
+
+def test_kappa_bo_dong_chua_gan_va_so_voi_nhan_tu_dong(tmp_path):
+    pd.DataFrame({"id": ["a", "b", "c", "d"], "text": ["1", "2", "3", "4"],
+                  "label_a": ["HOC_PHI", "LICH_THI", "KHAC", ""],
+                  "label_b": ["HOC_PHI", "LICH_THI", "HOC_PHI", ""]}).to_csv(tmp_path / "k.csv", index=False)
+    kappa, bat_dong = T.tinh_kappa(tmp_path / "k.csv")
+    assert list(bat_dong.id) == ["c"] and 0 < kappa < 1
+    df = pd.DataFrame({"id": ["a", "b"], "label": ["HOC_PHI", "LICH_HOC"]})
+    ti_le, khong_khop = T.do_khop_nhan_tu_dong(tmp_path / "k.csv", df)
+    assert ti_le == 0.5 and list(khong_khop.id) == ["b"]

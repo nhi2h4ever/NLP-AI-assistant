@@ -1,0 +1,15 @@
+id,text,label,du_doan,tin_cay
+VHU-19067,muốn đăng kí thi AV B2,KHAC,LICH_THI,0.9380957065266475
+VHU-19326,điểm rèn luyện đạt bao nhiêu điểm là được?,KHAC,LICH_THI,0.703691384209244
+VHU-1973,Học kỳ kết thúc khi nào,LICH_HOC,LICH_THI,0.67322228532612
+VHU-20508,"Trong portal còn dư học phí, muốn cấn trừ cho học ngoại ngữ",KHAC,HOC_PHI,0.7174388396540357
+VHU-20728,bảo lưu kết quả ngoại ngữ ở đâu,KHAC,QUY_CHE,0.5525555173253321
+VHU-20825,cách tính điểm học phần,LICH_THI,LICH_HOC,0.5595209491889581
+VHU-20992,"Đăng ký thiếu tín chỉ, có đăng ký thêm được không?",LICH_HOC,QUY_CHE,0.37228142304466066
+VHU-21778,nhận tiền hỗ trợ lớp trưởng,HOC_PHI,KHAC,0.47593659970806285
+VHU-22598,điểm xét tốt nghiệo,LICH_THI,QUY_CHE,0.7561109055734315
+VHU-23656,"Đã đăng ký và đóng tiền thi B1, muốn biết khi nào có lịch",KHAC,LICH_THI,0.6941490436514277
+VHU-2582,SV ngành tiếng Nhật học hết năm 2 có nguyện vọng du học trường có chương trình đào tạo liên kết hay hỗ trợ không,KHAC,QUY_CHE,0.7747720768227034
+VHU-6985,SV hỏi thông tin về việc nghỉ tết dương lịch,LICH_HOC,QUY_CHE,0.5473643263058007
+VHU-9874,Thông báo số tài khoản,HOC_PHI,KHAC,0.7801107836075604
+VHU-9924,Thanh toán học phsi,HOC_PHI,LICH_HOC,0.6124283777361977

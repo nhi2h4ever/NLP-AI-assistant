@@ -1,0 +1,35 @@
+{
+  "phien_ban": "v1",
+  "giai_doan": 1,
+  "demo": false,
+  "du_lieu": "data/questions.csv",
+  "mo_hinh": "Linear SVM",
+  "ly_do_chon": "Linear SVM tốt hơn LR rõ rệt (0.037 > 0.02).",
+  "tham_so": {
+    "tfidf__analyzer": "char_wb",
+    "tfidf__ngram_range": [
+      2,
+      5
+    ],
+    "tfidf__min_df": 2,
+    "tfidf__sublinear_tf": true,
+    "clf__C": 1.0
+  },
+  "nguong_tin_cay": 0.2,
+  "nguong_tuong_dong": null,
+  "so_cau_train": 2159,
+  "so_cau_test": 403,
+  "macro_f1_cv": 0.9197666814435429,
+  "chi_so_test": {
+    "Accuracy": 0.9652605459057072,
+    "Macro-F1": 0.9706435637978167,
+    "Accuracy theo phòng ban": 0.9702233250620348,
+    "Recall lớp KHAC": 0.925,
+    "Tỉ lệ xử lý tự động": 0.8114143920595533,
+    "Precision xử lý tự động": 0.9694189602446484,
+    "Macro-F1 câu không dấu": 0.9400285171366042
+  },
+  "thoi_gian_ms_moi_cau": 1.5966066598775797,
+  "ngay_huan_luyen": "2026-11-22 20:34",
+  "scikit_learn": "1.9.1"
+}

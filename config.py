@@ -53,7 +53,7 @@ NHAN = {
     "HOC_PHI": ("Học phí", "Phòng Kế hoạch - Tài chính"),
     # Gồm cả MIỄN GIẢM học phí và trợ cấp — do Phòng Công tác sinh viên xét, không phải Phòng Kế hoạch - Tài chính.
     "HOC_BONG": ("Học bổng & miễn giảm học phí", "Phòng Công tác sinh viên"),
-    "DO_AN": ("Đồ án & khóa luận", "Văn phòng Khoa"),
+    "DO_AN": ("Đồ án, khóa luận & thực tập", "Văn phòng Khoa"),
     "QUY_CHE": ("Quy chế & tốt nghiệp", "Phòng Đào tạo"),
     # QT_11_CTSV: thắc mắc không liên quan thủ tục hành chính / học tập do chuyên viên P.CTSV tư vấn, hướng dẫn.
     "KHAC": ("Khác (ngoài phạm vi)", DON_VI_CHU_TRI),
@@ -87,6 +87,8 @@ def lien_he(ten_phong_ban: str) -> str:
             f"ĐT {tt['dien_thoai']}" if tt.get("dien_thoai") else "", tt.get("web", "")]
     return " · ".join(p for p in phan if p)
 
-# Nguồn dữ liệu được phép đưa vào tập test (chỉ câu hỏi thật).
-# "team" (nhóm tự viết), "faq" (câu hỏi lấy từ kho FAQ) và "log" (nhật ký) không vào tập test gốc.
-NGUON_TEST = {"form", "facebook", "staff", "demo"}
+# Nguồn dữ liệu được phép đưa vào tập test (chỉ câu hỏi THẬT của sinh viên):
+#   form / facebook / staff: nhóm tự thu thập; web: trang hỏi đáp công khai của các trường (VHU, UIT, HLU).
+# Không vào tập test gốc: "team" (nhóm tự viết), "faq" (câu hỏi trong tài liệu FAQ của trường, đã diễn đạt lại),
+#   "noise" (biến thể nhiễu do công cụ tạo), "generated" (câu mô phỏng), "log" (nhật ký, có tập test riêng).
+NGUON_TEST = {"form", "facebook", "staff", "web", "demo"}

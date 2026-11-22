@@ -1,0 +1,4 @@
+Mô hình,Macro-F1 (CV),Độ lệch chuẩn,Accuracy (CV),Macro-F1 câu không dấu,Thời gian huấn luyện (giây/fold)
+Naive Bayes,0.665,0.014,0.794,0.663,0.032
+Logistic Regression,0.864,0.022,0.861,0.848,0.268
+Linear SVM,0.901,0.027,0.896,0.875,0.055

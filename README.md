@@ -15,7 +15,7 @@ Hệ thống AI dùng **Machine Learning** (TF-IDF + Naive Bayes / Logistic Regr
 | `LICH_THI` | Lịch thi & điểm thi | Phòng Khảo thí và Đảm bảo chất lượng giáo dục |
 | `HOC_PHI` | Học phí (mức thu, hạn đóng, cách đóng, hoàn tiền) | Phòng Kế hoạch - Tài chính |
 | `HOC_BONG` | Học bổng, miễn giảm học phí, trợ cấp | Phòng Công tác sinh viên |
-| `DO_AN` | Đồ án & khóa luận | Văn phòng Khoa |
+| `DO_AN` | Đồ án, khóa luận & thực tập | Văn phòng Khoa |
 | `QUY_CHE` | Quy chế & tốt nghiệp | Phòng Đào tạo |
 | `KHAC` | Ngoài phạm vi | Phòng Công tác sinh viên |
 
@@ -29,6 +29,41 @@ Hệ thống bám theo Quy trình *Tiếp nhận và giải quyết thắc mắc
 | 2. Tổng hợp, phân loại | Chuyên viên P.CTSV đọc, phân loại theo đơn vị liên quan, chuyển tiếp | 1 ngày sau khi nhận | **Mô hình ML phân loại và chuyển ngay**; câu chưa chắc chắn → chuyên viên P.CTSV |
 | 3. Thông báo kết quả | Chuyên viên trả lời qua email / fr.dut.udn.vn | 1–3 ngày | Sinh viên được báo phòng ban, liên hệ và thời hạn phản hồi (3 ngày làm việc; câu ngoài phạm vi 1–2 ngày) |
 
+## Dữ liệu
+
+`data/questions.csv` (2.603 câu, 7 nhãn) được tạo bằng `scripts/tao_du_lieu.py` từ dữ liệu gốc trong `data/raw/`:
+
+| `source` | Nguồn | Số câu | Vào tập test? |
+|---|---|---|---|
+| `web` | Câu hỏi **thật** của sinh viên trên trang hỏi đáp công khai: [tuvan.vhu.edu.vn](https://tuvan.vhu.edu.vn/van-de-quan-tam/dao-tao-hoc-vu.html) (ĐH Văn Hiến), [forum.uit.edu.vn](https://forum.uit.edu.vn/latest) (ĐH CNTT – ĐHQG TP.HCM), [hlu.edu.vn/qa](https://hlu.edu.vn/qa) (ĐH Luật Hà Nội) | 2.047 | Có |
+| `faq` | `1_Bo_cau_hoi_chuan_co_nguon.docx`: hỏi–đáp công khai của UEF, PTIT, ULAW (đã diễn đạt lại) | 74 | Không |
+| `noise` | `2_Bo_cau_hoi_nhieu_co_nguon.docx`: 3 biến thể nhiễu (không dấu, teencode, sai chính tả) của mỗi câu `faq` | 222 | Không |
+| `generated` | `Dataset_300_QA_DUT_co_nguon.docx`: câu mô phỏng về DUT (30 ý × 10 cách hỏi) | 260 | Không |
+
+- **Gán nhãn:**
+  - Câu trong file Word đã có nhãn gốc: ánh xạ sang 7 nhãn theo bảng `data/raw/bang_anh_xa_nhan.csv`, cộng thêm vài câu sửa riêng.
+  - Ticket trên web chưa có nhãn: gán theo từ khóa (cụm dài được so trước, ví dụ "khóa luận tốt nghiệp" → `DO_AN` chứ không phải `QUY_CHE`).
+  - Câu mơ hồ ("Tìm hiểu thông tin"), câu nhiều chủ đề và câu không phải của sinh viên (doanh nghiệp, tuyển dụng) bị loại. Danh sách và lý do ở `data/raw/web_bi_loai.csv`.
+  - Mỗi nhãn lấy tối đa 400 ticket để các nhãn không chênh lệch quá nhiều.
+- **Rà nhãn (Kappa):**
+  - Hai thành viên gán nhãn **độc lập** 100 câu trong `data/kappa_can_gan.csv`: người thứ nhất điền cột `label_a`, người thứ hai điền cột `label_b`, không xem nhãn của nhau và không xem `questions.csv`.
+  - Lưu file thành `data/kappa_check.csv`, rồi chạy lại notebook. Notebook tính Cohen's Kappa giữa hai người, và độ khớp giữa nhãn người gán với nhãn theo từ khóa.
+- **Ẩn danh:**
+  - Câu có tên người, số điện thoại, email hoặc MSSV bị loại khỏi `data/raw/`.
+  - Không lưu câu trả lời của trường (có thể chứa số điện thoại phụ huynh).
+- **Cột `nhom`:** các biến thể của cùng một câu gốc có chung `nhom`. Kiểm định chéo giữ chúng trong cùng một fold.
+- **Hạn chế cần nêu trong báo cáo:**
+  - Câu hỏi thật đến từ trường khác (VHU, UIT, HLU), chưa phải sinh viên DUT.
+  - Ticket VHU là bản tóm tắt do cán bộ ghi lại ("SV muốn…").
+  - Nhãn web được gán theo từ khóa nên cần rà lại.
+  - `DO_AN` ít câu (59, chủ yếu về thực tập). Nhóm nên thu thêm câu hỏi thật về đồ án qua Google Form.
+
+Chạy lại bước tạo dữ liệu (không cần mạng):
+
+```bash
+.venv/bin/python scripts/tao_du_lieu.py
+```
+
 ## Cấu trúc thư mục
 
 ```
@@ -41,7 +76,10 @@ app.py                 Trang Hỏi đáp cho sinh viên (Streamlit)
 pages/1_Quan_tri.py    Trang Quản trị cho chuyên viên Phòng Công tác sinh viên
 notebooks/train.ipynb  notebook huấn luyện: dữ liệu → so sánh mô hình → tinh chỉnh → đánh giá → lưu model
 scripts/kiem_thu_kich_ban.py  13 kịch bản kiểm thử hệ thống (Step 3)
+scripts/tao_du_lieu.py        tạo data/questions.csv từ data/raw/ (ánh xạ nhãn, gán nhãn theo từ khóa)
 tests/                 kiểm thử tự động (pytest)
+data/raw/              dữ liệu gốc đã ẩn danh: câu hỏi trích từ file Word, ticket từ trang hỏi đáp
+data/splits/           danh sách id tập test đã đóng băng
 data/templates/        mẫu file dữ liệu
 data/sample/           dữ liệu MẪU chỉ để chạy thử code — KHÔNG dùng cho báo cáo
 models/<phiên bản>/    model.joblib + metadata.json
@@ -74,11 +112,11 @@ FAQ_ROUTER_DEMO=1 .venv/bin/streamlit run app.py
 
 ## Quy trình làm với dữ liệu thật
 
-1. **Thu thập và gán nhãn** câu hỏi thật (Google Form, nhóm Facebook, câu hỏi P.CTSV đã nhận qua email / fr.dut.udn.vn…) vào `data/questions.csv` theo mẫu `data/templates/questions_template.csv`:
+1. **Thu thập và gán nhãn** thêm câu hỏi thật (Google Form, nhóm Facebook, câu hỏi P.CTSV đã nhận qua email / fr.dut.udn.vn…) vào `data/questions.csv` theo mẫu `data/templates/questions_template.csv`. Nếu chạy lại `scripts/tao_du_lieu.py` thì thêm các câu này vào sau, vì script ghi đè file:
    - `id`: mã duy nhất; `text`: câu hỏi; `label`: một trong 7 mã nhãn. Câu về **miễn giảm học phí** gán `HOC_BONG` (do Phòng Công tác sinh viên xét), không gán `HOC_PHI`.
-   - `source`: `form` / `facebook` / `staff` (câu hỏi thật, được vào tập test), `team` (nhóm tự viết) hoặc `faq` (lấy từ tài liệu trường) — hai loại sau chỉ dùng để huấn luyện.
-   - `multi_intent` (0/1), `annotator`, `faq_id` (chỉ cần ở giai đoạn 2).
-2. **Đo độ đồng thuận gán nhãn:** 2 người gán cùng khoảng 100 câu vào `data/kappa_check.csv` (mẫu `data/templates/kappa_template.csv`).
+   - `source`: `form` / `facebook` / `staff` / `web` (câu hỏi thật, được vào tập test), hoặc `team` (nhóm tự viết), `faq`, `noise`, `generated` — các loại sau chỉ dùng để huấn luyện.
+   - `multi_intent` (0/1), `annotator`, `faq_id` (chỉ cần ở giai đoạn 2), `nhom` (để trống nếu câu không phải biến thể của câu khác).
+2. **Đo độ đồng thuận gán nhãn:** 2 người gán độc lập 100 câu trong `data/kappa_can_gan.csv` rồi lưu thành `data/kappa_check.csv` (xem mục *Dữ liệu*).
 3. **Huấn luyện:** mở `notebooks/train.ipynb`, giữ `VERSION = "v1"`, chạy *Restart & Run All*. Kết quả: `models/v1/` và `reports/v1/`.
    - Lần chạy đầu tiên, danh sách câu hỏi của tập test được **đóng băng** ở `data/splits/test_ids.txt`. Các lần sau dùng lại đúng tập test này. Chỉ xoá file đó nếu muốn chia lại tập test, và chỉ làm trước khi chốt kết quả cho báo cáo.
 4. **Kiểm thử hệ thống:**

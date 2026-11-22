@@ -1,0 +1,14 @@
+#,Kịch bản,Input,Mong đợi,Thực tế,Đạt
+1,Câu chuẩn có dấu,Khi nào có lịch thi lại môn Giải tích 1?,LICH_THI → Phòng Khảo thí và Đảm bảo chất lượng giáo dục,LICH_THI (89%) → Phòng Khảo thí và Đảm bảo chất lượng giáo dục,Đạt
+2,Không dấu,khi nao co lich thi lai mon giai tich 1,LICH_THI → Phòng Khảo thí và Đảm bảo chất lượng giáo dục,LICH_THI (94%) → Phòng Khảo thí và Đảm bảo chất lượng giáo dục,Đạt
+3,"Teencode, viết tắt",hp ki nay dong tre dc ko ad,HOC_PHI → Phòng Kế hoạch - Tài chính,HOC_PHI (80%) → Phòng Kế hoạch - Tài chính,Đạt
+4,Miễn giảm học phí (không phải HOC_PHI),Em là con thương binh thì xin miễn giảm học phí thế nào ạ?,HOC_BONG → Phòng Công tác sinh viên,HOC_BONG (95%) → Phòng Công tác sinh viên,Đạt
+5,"Câu dài, nhiều câu",Dạ em chào thầy cô ạ. Em đang làm đồ án tốt nghiệp nhưng giả…,DO_AN → Văn phòng Khoa,QUY_CHE (38%) → Phòng Đào tạo,Không đạt
+6,Câu có hai ý,Học phí bao nhiêu và khi nào thi?,"HOC_PHI hoặc LICH_THI, hoặc chuyển P.CTSV nếu chưa chắc",HOC_PHI (66%) → Phòng Kế hoạch - Tài chính,Đạt
+7,Ngoài phạm vi,Gần trường có quán cơm nào ngon?,KHAC → Phòng Công tác sinh viên,KHAC (52%) → Phòng Công tác sinh viên,Đạt
+8,Học vụ chưa hỗ trợ,Làm lại thẻ sinh viên ở đâu?,KHAC → Phòng Công tác sinh viên,KHAC (94%) → Phòng Công tác sinh viên,Đạt
+9,Tiếng Anh,When is the retake exam?,Không chuyển nhầm phòng ban (→ Phòng Công tác sinh viên),KHAC (96%) → Phòng Công tác sinh viên,Đạt
+10,Input rỗng / ký tự lạ,???,Thông báo lỗi đầu vào,Câu hỏi chưa có nội dung chữ. Bạn vui lòng nhập câu hỏi bằng tiếng Việt.,Đạt
+11,Input rất dài,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa…,Báo vượt giới hạn,"Câu hỏi dài 5000 ký tự, vượt giới hạn 500 ký tự. Bạn vui lòng rút gọn câu hỏi.",Đạt
+12,Có thông tin cá nhân,Em MSSV 21520001 hỏi học phí kỳ này,Nhật ký đã thay MSSV bằng <mssv>,Em MSSV <mssv> hỏi học phí kỳ này,Đạt
+13,Thời gian phản hồi,50 câu liên tiếp,Trung bình < 1000 ms/câu,1.7 ms/câu,Đạt

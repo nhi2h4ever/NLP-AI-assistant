@@ -20,7 +20,7 @@ TEENCODE = {
 
 _EMAIL = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
 _SDT = re.compile(r"(?<!\d)(?:\+84|0)\d{9}(?!\d)")
-_MSSV = re.compile(r"(?<!\d)\d{8,10}(?!\d)")
+_MSSV = re.compile(r"(?<![\w])(?:\d{8,10}|\d{2,3}[a-zA-Z]{1,2}\d{5,7})(?![\w])")  # 102210001, 161A080509
 _URL = re.compile(r"https?://\S+|www\.\S+")
 _KY_TU_LA = re.compile(r"[^\w\s]")  # dấu câu, emoji, ký hiệu
 

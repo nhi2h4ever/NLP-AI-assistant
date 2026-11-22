@@ -13,7 +13,7 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, cohen_kappa_score, f1_score, recall_score
-from sklearn.model_selection import ParameterGrid, StratifiedKFold, train_test_split
+from sklearn.model_selection import ParameterGrid, StratifiedGroupKFold, StratifiedKFold, train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
@@ -51,9 +51,11 @@ def doc_du_lieu(path) -> pd.DataFrame:
     trung = df.id[df.id.duplicated()].tolist()
     if trung:
         raise ValueError(f"{path} có id bị trùng: {trung[:10]}")
-    for c in ["multi_intent", "annotator", "faq_id"]:
+    for c in ["multi_intent", "annotator", "faq_id", "nhom"]:
         if c not in df.columns:
             df[c] = ""
+    # nhom: các câu là biến thể của cùng một câu gốc có chung nhóm; trống = mỗi câu một nhóm
+    df["nhom"] = df.nhom.where(df.nhom != "", df.id)
     return df
 
 
@@ -79,10 +81,26 @@ def lam_sach(df: pd.DataFrame):
 
 
 def tinh_kappa(path):
-    """Đo độ đồng thuận giữa 2 người gán nhãn (file có cột text, label_a, label_b)."""
+    """Đo độ đồng thuận giữa 2 người gán nhãn (file có cột text, label_a, label_b).
+    Bỏ qua các dòng chưa gán đủ hai nhãn."""
     k = pd.read_csv(path, dtype=str, keep_default_na=False)
+    k = k[(k.label_a.str.strip() != "") & (k.label_b.str.strip() != "")]
+    if k.empty:
+        raise ValueError(f"{path} chưa có dòng nào được gán đủ label_a và label_b.")
     kappa = cohen_kappa_score(k.label_a, k.label_b)
     return kappa, k[k.label_a != k.label_b]
+
+
+def do_khop_nhan_tu_dong(path, df: pd.DataFrame):
+    """Nếu file Kappa có cột id: so nhãn trong dữ liệu (gán theo từ khóa) với nhãn người gán (label_a)
+    trên các câu người gán đồng ý với nhau. Trả về (tỉ lệ khớp, các câu không khớp) hoặc None."""
+    k = pd.read_csv(path, dtype=str, keep_default_na=False)
+    if "id" not in k.columns:
+        return None
+    k = k[(k.label_a != "") & (k.label_a == k.label_b)].merge(df[["id", "label"]], on="id")
+    if k.empty:
+        return None
+    return (k.label == k.label_a).mean(), k[k.label != k.label_a][["id", "text", "label", "label_a"]]
 
 
 def chia_tap(df: pd.DataFrame, thu_muc_chia: Path, ti_le_test=0.2, seed=42):
@@ -168,15 +186,23 @@ def tao_pipeline(ten: str, tham_so: dict = None, xac_suat=False) -> Pipeline:
     return Pipeline([("tfidf", tfidf), ("clf", clf)])
 
 
+def chia_fold(df: pd.DataFrame, so_fold=5, seed=42):
+    """Các fold của kiểm định chéo, giữ tỉ lệ nhãn. Nếu có cột `nhom`, các câu cùng nhóm (biến thể của
+    cùng một câu gốc) luôn nằm chung một fold, để không đánh giá trên câu gần giống câu đã học."""
+    if "nhom" in df.columns and df.nhom.duplicated().any():
+        return StratifiedGroupKFold(so_fold, shuffle=True, random_state=seed).split(df, df.label, df.nhom)
+    return StratifiedKFold(so_fold, shuffle=True, random_state=seed).split(df, df.label)
+
+
 def danh_gia_cheo(df: pd.DataFrame, ten: str, tham_so: dict = None, tang_cuong=True, tach_tu=True,
                   xac_suat=False, so_fold=5, seed=42) -> dict:
-    """Kiểm định chéo stratified k-fold. Trong mỗi fold: chỉ tăng cường phần train của fold,
-    đánh giá trên câu GỐC của fold (và trên bản không dấu để đo độ bền)."""
+    """Kiểm định chéo stratified k-fold (theo nhóm nếu có cột `nhom`). Trong mỗi fold: chỉ tăng cường
+    phần train của fold, đánh giá trên câu GỐC của fold (và trên bản không dấu để đo độ bền)."""
     cot, cot_bd = _cot(tach_tu)
     lop = np.array(sorted(df.label.unique()))
     oof = np.zeros((len(df), len(lop))) if xac_suat else None
     f1, acc, f1_bd, giay = [], [], [], []
-    for tr, va in StratifiedKFold(so_fold, shuffle=True, random_state=seed).split(df, df.label):
+    for tr, va in chia_fold(df, so_fold, seed):
         X, y = tap_huan_luyen(df.iloc[tr], tang_cuong, tach_tu)
         t0 = time.perf_counter()
         model = tao_pipeline(ten, tham_so, xac_suat).fit(X, y)
