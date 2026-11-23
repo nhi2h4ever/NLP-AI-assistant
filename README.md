@@ -7,16 +7,16 @@ Hệ thống AI dùng **Machine Learning** (TF-IDF + Naive Bayes / Logistic Regr
 | **1 (hiện tại)** | `False` | Phân loại câu hỏi vào 7 chủ đề → chuyển đến phòng ban phụ trách. Câu mô hình chưa chắc chắn (độ tin cậy < τ) được chuyển về Phòng Công tác sinh viên phân loại thủ công. |
 | 2 | `True` | Thêm trả lời tự động bằng kho FAQ (cosine similarity trên TF-IDF). Cần file `data/faq.csv`. |
 
-**Chủ đề → phòng ban** của Trường Đại học Bách khoa – ĐH Đà Nẵng. Tên phòng ban và thông tin liên hệ (phòng, điện thoại, website) hiển thị cho sinh viên được khai báo trong `config.PHONG_BAN`; nhóm điền thêm thông tin của Văn phòng Khoa:
+**Chủ đề → phòng ban** của Trường Đại học Bách khoa – ĐH Đà Nẵng, theo danh bạ chính thức [dut.udn.vn/Danhba](https://dut.udn.vn/Danhba). Công tác khảo thí (lịch thi, phúc khảo) thuộc Phòng Đào tạo và Bảo đảm chất lượng. Thông tin liên hệ (phòng, điện thoại, email, website) hiển thị cho sinh viên được khai báo trong `config.PHONG_BAN`. Với Văn phòng Khoa, sinh viên được chỉ tới danh bạ của Trường để tìm khoa mình:
 
 | Mã | Chủ đề | Phòng ban |
 |---|---|---|
-| `LICH_HOC` | Lịch học & đăng ký học phần | Phòng Đào tạo |
-| `LICH_THI` | Lịch thi & điểm thi | Phòng Khảo thí và Đảm bảo chất lượng giáo dục |
+| `LICH_HOC` | Lịch học & đăng ký học phần | Phòng Đào tạo và Bảo đảm chất lượng |
+| `LICH_THI` | Lịch thi & điểm thi | Phòng Đào tạo và Bảo đảm chất lượng |
 | `HOC_PHI` | Học phí (mức thu, hạn đóng, cách đóng, hoàn tiền) | Phòng Kế hoạch - Tài chính |
 | `HOC_BONG` | Học bổng, miễn giảm học phí, trợ cấp | Phòng Công tác sinh viên |
 | `DO_AN` | Đồ án, khóa luận & thực tập | Văn phòng Khoa |
-| `QUY_CHE` | Quy chế & tốt nghiệp | Phòng Đào tạo |
+| `QUY_CHE` | Quy chế & tốt nghiệp | Phòng Đào tạo và Bảo đảm chất lượng |
 | `KHAC` | Ngoài phạm vi | Phòng Công tác sinh viên |
 
 ## Căn cứ: Quy trình QT_11_CTSV
@@ -31,11 +31,11 @@ Hệ thống bám theo Quy trình *Tiếp nhận và giải quyết thắc mắc
 
 ## Dữ liệu
 
-`data/questions.csv` (2.603 câu, 7 nhãn) được tạo bằng `scripts/tao_du_lieu.py` từ dữ liệu gốc trong `data/raw/`:
+`data/questions.csv` (2.815 câu, 7 nhãn) được tạo bằng `scripts/tao_du_lieu.py` từ dữ liệu gốc trong `data/raw/`:
 
 | `source` | Nguồn | Số câu | Vào tập test? |
 |---|---|---|---|
-| `web` | Câu hỏi **thật** của sinh viên trên trang hỏi đáp công khai: [tuvan.vhu.edu.vn](https://tuvan.vhu.edu.vn/van-de-quan-tam/dao-tao-hoc-vu.html) (ĐH Văn Hiến), [forum.uit.edu.vn](https://forum.uit.edu.vn/latest) (ĐH CNTT – ĐHQG TP.HCM), [hlu.edu.vn/qa](https://hlu.edu.vn/qa) (ĐH Luật Hà Nội) | 2.047 | Có |
+| `web` | Câu hỏi **thật** của sinh viên trên trang hỏi đáp công khai: [tuvan.vhu.edu.vn](https://tuvan.vhu.edu.vn/van-de-quan-tam/dao-tao-hoc-vu.html) (ĐH Văn Hiến), [forum.uit.edu.vn](https://forum.uit.edu.vn/latest) (ĐH CNTT – ĐHQG TP.HCM), [hlu.edu.vn/qa](https://hlu.edu.vn/qa) (ĐH Luật Hà Nội). Gồm 1.973 ticket VHU, 285 tiêu đề UIT forum (cả chuyên mục đời sống làm ví dụ ngoài phạm vi) và 1 câu HLU | 2.259 | Có |
 | `faq` | `1_Bo_cau_hoi_chuan_co_nguon.docx`: hỏi–đáp công khai của UEF, PTIT, ULAW (đã diễn đạt lại) | 74 | Không |
 | `noise` | `2_Bo_cau_hoi_nhieu_co_nguon.docx`: 3 biến thể nhiễu (không dấu, teencode, sai chính tả) của mỗi câu `faq` | 222 | Không |
 | `generated` | `Dataset_300_QA_DUT_co_nguon.docx`: câu mô phỏng về DUT (30 ý × 10 cách hỏi) | 260 | Không |
@@ -44,7 +44,8 @@ Hệ thống bám theo Quy trình *Tiếp nhận và giải quyết thắc mắc
   - Câu trong file Word đã có nhãn gốc: ánh xạ sang 7 nhãn theo bảng `data/raw/bang_anh_xa_nhan.csv`, cộng thêm vài câu sửa riêng.
   - Ticket trên web chưa có nhãn: gán theo từ khóa (cụm dài được so trước, ví dụ "khóa luận tốt nghiệp" → `DO_AN` chứ không phải `QUY_CHE`).
   - Câu mơ hồ ("Tìm hiểu thông tin"), câu nhiều chủ đề và câu không phải của sinh viên (doanh nghiệp, tuyển dụng) bị loại. Danh sách và lý do ở `data/raw/web_bi_loai.csv`.
-  - Mỗi nhãn lấy tối đa 400 ticket để các nhãn không chênh lệch quá nhiều.
+  - Câu trong chuyên mục đời sống của UIT forum (tán gẫu, chỗ trọ, việc làm thêm) không khớp từ khóa học vụ nào được gán `KHAC`.
+  - Mỗi nhãn lấy tối đa 400 ticket VHU (chọn theo mã băm của id, nên ổn định giữa các lần chạy) để các nhãn không chênh lệch quá nhiều.
 - **Rà nhãn (Kappa):**
   - Hai thành viên gán nhãn **độc lập** 100 câu trong `data/kappa_can_gan.csv`: người thứ nhất điền cột `label_a`, người thứ hai điền cột `label_b`, không xem nhãn của nhau và không xem `questions.csv`.
   - Lưu file thành `data/kappa_check.csv`, rồi chạy lại notebook. Notebook tính Cohen's Kappa giữa hai người, và độ khớp giữa nhãn người gán với nhãn theo từ khóa.

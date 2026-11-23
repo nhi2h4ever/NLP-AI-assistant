@@ -1,15 +1,29 @@
 id,text,label,du_doan,tin_cay
-VHU-19067,muốn đăng kí thi AV B2,KHAC,LICH_THI,0.9380957065266475
-VHU-19326,điểm rèn luyện đạt bao nhiêu điểm là được?,KHAC,LICH_THI,0.703691384209244
-VHU-1973,Học kỳ kết thúc khi nào,LICH_HOC,LICH_THI,0.67322228532612
-VHU-20508,"Trong portal còn dư học phí, muốn cấn trừ cho học ngoại ngữ",KHAC,HOC_PHI,0.7174388396540357
-VHU-20728,bảo lưu kết quả ngoại ngữ ở đâu,KHAC,QUY_CHE,0.5525555173253321
-VHU-20825,cách tính điểm học phần,LICH_THI,LICH_HOC,0.5595209491889581
-VHU-20992,"Đăng ký thiếu tín chỉ, có đăng ký thêm được không?",LICH_HOC,QUY_CHE,0.37228142304466066
-VHU-21778,nhận tiền hỗ trợ lớp trưởng,HOC_PHI,KHAC,0.47593659970806285
-VHU-22598,điểm xét tốt nghiệo,LICH_THI,QUY_CHE,0.7561109055734315
-VHU-23656,"Đã đăng ký và đóng tiền thi B1, muốn biết khi nào có lịch",KHAC,LICH_THI,0.6941490436514277
-VHU-2582,SV ngành tiếng Nhật học hết năm 2 có nguyện vọng du học trường có chương trình đào tạo liên kết hay hỗ trợ không,KHAC,QUY_CHE,0.7747720768227034
-VHU-6985,SV hỏi thông tin về việc nghỉ tết dương lịch,LICH_HOC,QUY_CHE,0.5473643263058007
-VHU-9874,Thông báo số tài khoản,HOC_PHI,KHAC,0.7801107836075604
-VHU-9924,Thanh toán học phsi,HOC_PHI,LICH_HOC,0.6124283777361977
+UIT-112220,Vấn đề học Anh văn ở ngoài,KHAC,LICH_HOC,0.4136518004550344
+UIT-123522,có nên đăng kí học chương trình cử nhân tài năng?,LICH_HOC,KHAC,0.4436602785819032
+UIT-134966,vấn đề tính cách và nghề nghiệp ?,KHAC,QUY_CHE,0.9709483551324893
+UIT-149449,18 tuổi học trung cấp nghề?,KHAC,LICH_HOC,0.5557791792576401
+VHU-16868,chuyển lớp chung với nhau,LICH_HOC,QUY_CHE,0.7070301678940271
+VHU-1783,"Thời khóa biểu, chuyển ngành",QUY_CHE,LICH_HOC,0.6221411823378549
+VHU-19026,học phí chuyên ngành chất lượng cao,HOC_PHI,QUY_CHE,0.588068997418785
+VHU-19247,chuyển cơ sở học,KHAC,QUY_CHE,0.5957775455554495
+VHU-19347,1 năm gồm bao nhiêu học kỳ,LICH_HOC,KHAC,0.5289498604619297
+VHU-19459,kiểm tra còn thiếu hồ sơ gì để xét tôt nghiệp,KHAC,QUY_CHE,0.9013804834690587
+VHU-20129,thời gian phát lễ phục,QUY_CHE,KHAC,0.5609312473121199
+VHU-2025,Lịch học sinh hoạt thể chất,LICH_HOC,KHAC,0.916775953817791
+VHU-20509,Khi nào có kết quả thi B1,KHAC,LICH_THI,0.9928326125610123
+VHU-20900,thắc mắc về biên lai của sinh viên,HOC_PHI,LICH_THI,0.39579358995841946
+VHU-21492,sinh viên muốn cấp lại biên lai,HOC_PHI,LICH_THI,0.41524178122961664
+VHU-21548,sinh viên không rút được tiền trong tài khoản BIDV,KHAC,HOC_PHI,0.74445984257957
+VHU-21815,Bây giờ nhận hồ sơ tiếng anh nữ không?,KHAC,QUY_CHE,0.5086727531600759
+VHU-23368,Đã gửi CV xác minh bằng ngoại ngữ từ 13/6 nhưng chưa nhận được,KHAC,QUY_CHE,0.5020029333696376
+VHU-2338,SV khoa báo chí trường VHNT Quân đội muốn xin chuyển trường vào khoa du lịch,QUY_CHE,KHAC,0.3326794944953983
+VHU-23820,có thể cấn trừ tiền kỹ năng mềm được không?,HOC_PHI,LICH_HOC,0.2617860271128136
+VHU-4019,Thi văn bằng 2 như thế nào?,QUY_CHE,LICH_THI,0.4008144580613029
+VHU-5672,"Quản trị kinh doanh, tân sinh viên, xin nghỉ học vì sốt xuất huyết.",KHAC,QUY_CHE,0.5385014422641171
+VHU-6321,SV đổi ngành từ NN Pháp => Du lịch xác nhận thông tin,QUY_CHE,KHAC,0.5529795358356345
+VHU-7045,"Phụ huynh đã đến trường hỏi về việc đóng học phí khi chuyển điểm cho sinh viên và được biết có 1 môn trùng với môn đã học nhưng P.QLĐT chưa tìm thấy bảng điểm, hẹn 29/12 quay lại cần hỗ trợ thông tin",KHAC,HOC_PHI,0.4752743593534457
+VHU-7541,Sv thắc mắc đăng ký nhầm học phần có thể không đóng học phí được không,HOC_PHI,LICH_HOC,0.49277126385492664
+VHU-8029,"Chuyển ngành, bây giờ không đăng ký học phần được",QUY_CHE,LICH_HOC,0.7251801426979008
+VHU-9846,bảo lưu học phần,QUY_CHE,LICH_HOC,0.547975015143938
+VHU-9909,"0đ môn KTXHVH Asian, dù đã đăng ký đổi lịch thi và được sực đồng ý",LICH_THI,LICH_HOC,0.6006747368726655

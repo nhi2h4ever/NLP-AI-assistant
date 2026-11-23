@@ -28,16 +28,21 @@ FAQ_PATH = (DATA_DIR / "sample" / "faq_sample.csv") if DEMO else (DATA_DIR / "fa
 # Độ dài tối đa của một câu hỏi (ký tự)
 MAX_LEN = 500
 
-# Phòng ban của Trường Đại học Bách khoa – Đại học Đà Nẵng (theo website dut.udn.vn).
-# Tên phòng ban -> thông tin liên hệ hiển thị cho sinh viên khi câu hỏi được chuyển đến.
+# Phòng ban của Trường Đại học Bách khoa – Đại học Đà Nẵng, theo danh bạ chính thức https://dut.udn.vn/Danhba
+# (tra cứu 22/11/2026). Công tác khảo thí (lịch thi, thi kết thúc học phần, phúc khảo) thuộc
+# Phòng Đào tạo và Bảo đảm chất lượng. Tên phòng ban -> thông tin liên hệ hiển thị cho sinh viên.
 PHONG_BAN = {
-    "Phòng Đào tạo": {"phong": "A123", "dien_thoai": "0236.3842145", "web": "http://dut.udn.vn/Phong/DaoTao"},
-    "Phòng Khảo thí và Đảm bảo chất lượng giáo dục": {
-        "phong": "S03", "dien_thoai": "0236.3737931", "web": "http://dut.udn.vn/Phong/QualityAssurance"},
-    "Phòng Kế hoạch - Tài chính": {"phong": "A120", "dien_thoai": "0236.3841660", "web": "http://dut.udn.vn/Phong/TaiChinh"},
-    "Phòng Công tác sinh viên": {"phong": "A108", "dien_thoai": "0236.3738268", "web": "http://dut.udn.vn/Phong/Sinhvien"},
-    # Thuộc từng khoa — nhóm điền phòng/điện thoại của khoa mình.
-    "Văn phòng Khoa": {"phong": "", "dien_thoai": "", "web": ""},
+    "Phòng Đào tạo và Bảo đảm chất lượng": {
+        "phong": "A123", "dien_thoai": "0236.3842.145", "email": "dt-bdcl.dhbk@dut.udn.vn",
+        "web": "https://dut.udn.vn/Phong/Daotao"},
+    "Phòng Kế hoạch - Tài chính": {
+        "phong": "A120", "dien_thoai": "0236.3841.660", "email": "khtc.dhbk@dut.udn.vn",
+        "web": "https://dut.udn.vn/Phong/TaiChinh"},
+    "Phòng Công tác sinh viên": {
+        "phong": "A108", "dien_thoai": "0236.3738.268", "email": "ctsv.dhbk@dut.udn.vn",
+        "web": "https://dut.udn.vn/Phong/CTSV"},
+    # Mỗi khoa một văn phòng: sinh viên tra điện thoại, email của khoa mình trong danh bạ của Trường.
+    "Văn phòng Khoa": {"phong": "", "dien_thoai": "", "email": "", "web": "https://dut.udn.vn/Danhba"},
 }
 
 # Theo Quy trình QT_11_CTSV "Tiếp nhận và giải quyết thắc mắc cho sinh viên":
@@ -48,13 +53,13 @@ QUY_TRINH = "QT_11_CTSV"
 
 # Mã nhãn -> (tên hiển thị, phòng ban phụ trách — phải là một khóa trong PHONG_BAN).
 NHAN = {
-    "LICH_HOC": ("Lịch học & đăng ký học phần", "Phòng Đào tạo"),
-    "LICH_THI": ("Lịch thi & điểm thi", "Phòng Khảo thí và Đảm bảo chất lượng giáo dục"),
+    "LICH_HOC": ("Lịch học & đăng ký học phần", "Phòng Đào tạo và Bảo đảm chất lượng"),
+    "LICH_THI": ("Lịch thi & điểm thi", "Phòng Đào tạo và Bảo đảm chất lượng"),
     "HOC_PHI": ("Học phí", "Phòng Kế hoạch - Tài chính"),
     # Gồm cả MIỄN GIẢM học phí và trợ cấp — do Phòng Công tác sinh viên xét, không phải Phòng Kế hoạch - Tài chính.
     "HOC_BONG": ("Học bổng & miễn giảm học phí", "Phòng Công tác sinh viên"),
     "DO_AN": ("Đồ án, khóa luận & thực tập", "Văn phòng Khoa"),
-    "QUY_CHE": ("Quy chế & tốt nghiệp", "Phòng Đào tạo"),
+    "QUY_CHE": ("Quy chế & tốt nghiệp", "Phòng Đào tạo và Bảo đảm chất lượng"),
     # QT_11_CTSV: thắc mắc không liên quan thủ tục hành chính / học tập do chuyên viên P.CTSV tư vấn, hướng dẫn.
     "KHAC": ("Khác (ngoài phạm vi)", DON_VI_CHU_TRI),
 }
@@ -80,11 +85,11 @@ def phong_ban(nhan: str) -> str:
 
 
 def lien_he(ten_phong_ban: str) -> str:
-    """Chuỗi liên hệ của phòng ban, ví dụ 'Phòng A123 · ĐT 0236.3842145 · http://...'.
+    """Chuỗi liên hệ của phòng ban, ví dụ 'Phòng A123 · ĐT 0236.3842.145 · dt-bdcl...@dut.udn.vn · https://...'.
     Rỗng nếu chưa có thông tin."""
     tt = PHONG_BAN.get(ten_phong_ban, {})
     phan = [f"Phòng {tt['phong']}" if tt.get("phong") else "",
-            f"ĐT {tt['dien_thoai']}" if tt.get("dien_thoai") else "", tt.get("web", "")]
+            f"ĐT {tt['dien_thoai']}" if tt.get("dien_thoai") else "", tt.get("email", ""), tt.get("web", "")]
     return " · ".join(p for p in phan if p)
 
 # Nguồn dữ liệu được phép đưa vào tập test (chỉ câu hỏi THẬT của sinh viên):

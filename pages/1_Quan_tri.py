@@ -93,7 +93,7 @@ else:
 # ---------------- Câu hỏi theo phòng ban
 st.subheader("Câu hỏi đã chuyển đến các phòng ban")
 da_chuyen = df[df.hanh_dong != CAN_PHAN_LOAI]
-phong = st.multiselect("Lọc theo phòng ban", sorted(da_chuyen.phong_ban.unique()))
+phong = st.multiselect("Lọc theo phòng ban", sorted(da_chuyen.phong_ban.unique()), placeholder="Tất cả phòng ban")
 if phong:
     da_chuyen = da_chuyen[da_chuyen.phong_ban.isin(phong)]
 st.dataframe(da_chuyen[cot_bang].sort_values("thoi_gian", ascending=False), hide_index=True, width="stretch",

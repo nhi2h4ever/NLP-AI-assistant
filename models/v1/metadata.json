@@ -3,33 +3,33 @@
   "giai_doan": 1,
   "demo": false,
   "du_lieu": "data/questions.csv",
-  "mo_hinh": "Linear SVM",
-  "ly_do_chon": "Linear SVM tốt hơn LR rõ rệt (0.037 > 0.02).",
+  "mo_hinh": "Logistic Regression",
+  "ly_do_chon": "Linear SVM cao hơn LR 0.017 (≤ 0.02), chênh lệch không đáng kể nên chọn Logistic Regression vì cho ra xác suất.",
   "tham_so": {
     "tfidf__analyzer": "char_wb",
     "tfidf__ngram_range": [
       2,
-      5
+      4
     ],
     "tfidf__min_df": 2,
     "tfidf__sublinear_tf": true,
-    "clf__C": 1.0
+    "clf__C": 10.0
   },
   "nguong_tin_cay": 0.2,
   "nguong_tuong_dong": null,
-  "so_cau_train": 2159,
-  "so_cau_test": 403,
-  "macro_f1_cv": 0.9197666814435429,
+  "so_cau_train": 2331,
+  "so_cau_test": 446,
+  "macro_f1_cv": 0.9228935447662083,
   "chi_so_test": {
-    "Accuracy": 0.9652605459057072,
-    "Macro-F1": 0.9706435637978167,
-    "Accuracy theo phòng ban": 0.9702233250620348,
-    "Recall lớp KHAC": 0.925,
-    "Tỉ lệ xử lý tự động": 0.8114143920595533,
-    "Precision xử lý tự động": 0.9694189602446484,
-    "Macro-F1 câu không dấu": 0.9400285171366042
+    "Accuracy": 0.9372197309417041,
+    "Macro-F1": 0.9518136501382275,
+    "Accuracy theo phòng ban": 0.9506726457399103,
+    "Recall lớp KHAC": 0.8842105263157894,
+    "Tỉ lệ xử lý tự động": 0.7982062780269058,
+    "Precision xử lý tự động": 0.9550561797752809,
+    "Macro-F1 câu không dấu": 0.924305008429597
   },
-  "thoi_gian_ms_moi_cau": 1.5966066598775797,
-  "ngay_huan_luyen": "2026-11-22 20:34",
+  "thoi_gian_ms_moi_cau": 0.8166633200016804,
+  "ngay_huan_luyen": "2026-11-22 22:22",
   "scikit_learn": "1.9.1"
 }

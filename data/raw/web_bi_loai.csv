@@ -1,9 +1,11 @@
 ma,chuyen_muc,text,ghi_chu
+VHU-1943,chuyen-nganh-chuyen-truong,SV khoa du lịch muốn đổi khoa kế tóa,không khớp từ khóa
 VHU-2167,chuyen-nganh-chuyen-truong,Ngôn ngữ Anh muốn chuyển QTKD,không khớp từ khóa
+VHU-2285,chuyen-nganh-chuyen-truong,SV muốn chuyển từ du lịch sang kinh tế,không khớp từ khóa
 VHU-2396,chuyen-nganh-chuyen-truong,Tìm hiểu thông tin đăng ký ngành,không khớp từ khóa
+VHU-2416,chuyen-nganh-chuyen-truong,SV học khoa du lịch muốn đổi khoa kinh tết,không khớp từ khóa
 VHU-2434,chuyen-nganh-chuyen-truong,Tìm hiểu thông tin về việc chuyển NN Anh sang NN Nhật,không khớp từ khóa
 VHU-3452,chuyen-nganh-chuyen-truong,Tìm hiểu thông tin,không khớp từ khóa
-VHU-6117,chuyen-nganh-chuyen-truong,Đổi chuyên ngành từ QT doanh nghiệp - TC kế toán,không phải câu hỏi của sinh viên
 VHU-6606,chuyen-nganh-chuyen-truong,Thông tin chuyển ngàh,không khớp từ khóa
 VHU-6979,chuyen-nganh-chuyen-truong,"SV có nhu cầu chuyển ngành, đã đăng ký học phần và đóng học phí HK2",nhiều chủ đề: HOC_PHI+QUY_CHE
 VHU-11096,chuyen-nganh-chuyen-truong,"Tìm hiểu thông tin chính sách chuyền trường , học bổng và chính sách vay vốn dành cho tân sinh viên Văn Hiến",nhiều chủ đề: HOC_BONG+KHAC
@@ -37,7 +39,9 @@ VHU-5270,dao-tao-hoc-vu,kỹ năng mềm,không khớp từ khóa
 VHU-5497,dao-tao-hoc-vu,Lịch học CỦA TÂN SINH VIÊN,nhiều chủ đề: KHAC+LICH_HOC
 VHU-5543,dao-tao-hoc-vu,"Ngành Tài chính - Marketing, thời gian học chính thức?",không khớp từ khóa
 VHU-5562,dao-tao-hoc-vu,Xin nghỉ lớp kỉ năng mềm đợt 1.,không khớp từ khóa
+VHU-5565,dao-tao-hoc-vu,"Du lịch, vào cổng Porto ko được.",không khớp từ khóa
 VHU-5571,dao-tao-hoc-vu,Quản trị kinh doanh - Thời gian học chính thức?,không khớp từ khóa
+VHU-5592,dao-tao-hoc-vu,du lịch-kỹ năng mềm học trong bao lâu?,không khớp từ khóa
 VHU-5657,dao-tao-hoc-vu,Thông tin P. QLĐT,không khớp từ khóa
 VHU-5747,dao-tao-hoc-vu,đã nhập học đợt 3 giảm 10% học phí như thế nào?,nhiều chủ đề: HOC_BONG+KHAC
 VHU-5784,dao-tao-hoc-vu,"NN Anh, ĐỊA CHỈ HỌC",không khớp từ khóa
@@ -57,7 +61,7 @@ VHU-6613,dao-tao-hoc-vu,SV bị tai nạn giao thông muốn bảo lưu kết qu
 VHU-6765,dao-tao-hoc-vu,SV chuyển lớp CLC chưa bổ sung học phí kịp có thể tham gia thi kết thúc học phần không?,nhiều chủ đề: HOC_PHI+LICH_HOC+LICH_THI
 VHU-6768,dao-tao-hoc-vu,SV không liên hệ P. QLĐT được,không khớp từ khóa
 VHU-6787,dao-tao-hoc-vu,Xác nhận lại về lịch học GDQP nội trú và bán trú,nhiều chủ đề: KHAC+LICH_HOC
-VHU-6795,dao-tao-hoc-vu,"SV nhận cuộc gọi tham gia ""trải nghiệm ngành nghề"" của khoa du lịch nên xác nhận",nhiều chủ đề: KHAC+LICH_HOC
+VHU-6796,dao-tao-hoc-vu,Không kết nối được khoa du lịch,không khớp từ khóa
 VHU-6799,dao-tao-hoc-vu,SV cần liên hệ P.QLĐT,không khớp từ khóa
 VHU-6828,dao-tao-hoc-vu,SV chiều nay thi kết thúc học phần nhưng không có lịch thi (đã đóng hết học phí),nhiều chủ đề: HOC_PHI+LICH_THI
 VHU-6833,dao-tao-hoc-vu,SV hỏi khi đi thi có cần mặc đồng phục không,nhiều chủ đề: KHAC+LICH_THI
@@ -75,6 +79,7 @@ VHU-7367,dao-tao-hoc-vu,Tìm hiểu thông tin học tập của sinh viên,khô
 VHU-7453,dao-tao-hoc-vu,SV không đóng học phí HK1 và không học kỳ 2 muốn học tiếp phải làm sao,nhiều chủ đề: HOC_PHI+QUY_CHE
 VHU-7649,dao-tao-hoc-vu,Đã đóng tiền học học kỳ 2 rồi nhưng do bị bệnh không đi học được giờ sang học kỳ sau có thể tiếp tục học được không?,nhiều chủ đề: HOC_PHI+QUY_CHE
 VHU-7657,dao-tao-hoc-vu,"phụ huynh thắc mắc về thời gian đăng kí và học quốc phòng, có thể ở ngoại trú hay không",nhiều chủ đề: KHAC+LICH_HOC
+VHU-7664,dao-tao-hoc-vu,Trường có đào tạo lớp nghiệp vụ Hướng dẫn viên du lịch ngắn hạn 3 tháng không?,không khớp từ khóa
 VHU-7830,dao-tao-hoc-vu,Bảo lưu kết quả học tập giờ muốn học lại thì sao,nhiều chủ đề: LICH_THI+QUY_CHE
 VHU-7848,dao-tao-hoc-vu,Xin sdt Phòng QLDT,không khớp từ khóa
 VHU-7956,dao-tao-hoc-vu,SV thắc mắc học phí còn thiếu 300k phải làm sao để được thi kỹ năng sử dụng Tiếng Việt.,nhiều chủ đề: HOC_PHI+LICH_THI
@@ -236,7 +241,6 @@ VHU-22109,dao-tao-hoc-vu,Sinh viên chưa hoàn thành học phí có bị cấm
 VHU-22188,dao-tao-hoc-vu,Điểm học kỳ 1 vẫn chưa có,nhiều chủ đề: LICH_HOC+LICH_THI
 VHU-22436,dao-tao-hoc-vu,Tìm hiểu về đăng ký học phần và học phí,nhiều chủ đề: HOC_PHI+LICH_HOC
 VHU-22475,dao-tao-hoc-vu,Trường có nghỉ hè không?,không khớp từ khóa
-VHU-22477,dao-tao-hoc-vu,"K16 vào portal không đăng ký môn ""Học kỳ doanh nghiệp "" thay cho 3 môn thay thế theo phổ biến của thầy Hào",không phải câu hỏi của sinh viên
 VHU-22524,dao-tao-hoc-vu,Đã hoàn thành học phí nhưng không có tên trong danh sách thi cuối kỳ,nhiều chủ đề: HOC_PHI+LICH_THI
 VHU-22561,dao-tao-hoc-vu,Sinh viên đã đóng học phí nhưng chưa có tên trong danh sách thi cuối kỳ,nhiều chủ đề: HOC_PHI+LICH_THI
 VHU-22588,dao-tao-hoc-vu,Kiểm tra điểm thi lại môn quan hệ kinh tế quốc tế để chuẩn bị đăng ký học phần,nhiều chủ đề: LICH_HOC+LICH_THI
@@ -279,6 +283,7 @@ VHU-23767,dao-tao-hoc-vu,kiểm tra kết quả học,không khớp từ khóa
 VHU-23800,dao-tao-hoc-vu,hủy hoc phần,không khớp từ khóa
 VHU-520,ho-tro-sinh-vien,Bổ sung thông tin CMND,không khớp từ khóa
 VHU-1578,ho-tro-sinh-vien,Liên thông trung cấp trường khác,không khớp từ khóa
+VHU-1620,ho-tro-sinh-vien,Sđt khoa Du lịch,không khớp từ khóa
 VHU-1682,ho-tro-sinh-vien,"học phí, xác nhận sinh viên ( phụ huynh cực nhây )",nhiều chủ đề: HOC_PHI+KHAC
 VHU-1761,ho-tro-sinh-vien,Yêu cầu cung cấp giấy báo trúng tuyển,không khớp từ khóa
 VHU-1824,ho-tro-sinh-vien,Đang học liên thông trường CNTP ngành QTKD muốn chuyển qua trường VH có được không?,không khớp từ khóa
@@ -387,12 +392,14 @@ VHU-2569,ho-tro-sinh-vien,Tuyển dung SV,không khớp từ khóa
 VHU-2572,ho-tro-sinh-vien,Muốn biết chưa đóng tiền mua BHYT có tên trong DS không để gia đình tự mua tại địa phương,nhiều chủ đề: HOC_PHI+KHAC
 VHU-2594,ho-tro-sinh-vien,SV làm tiểu luận Quản trị học nhưng bị tai nạn nên chưa ký tên được phải làm sao?,không khớp từ khóa
 VHU-2604,ho-tro-sinh-vien,"Thông tin về chương trình đào tạo (lơp học phần bị hũy,..), học phí trễ hạn ck qua ngân hàng, thủ tục chuyển trường...",nhiều chủ đề: HOC_PHI+QUY_CHE
+VHU-2686,ho-tro-sinh-vien,"SV thắc mắc học khoa QT khách sạn - khu du lịch có được cùng lúc học ngành quản trị nhà hàng, ăn uống không",không khớp từ khóa
 VHU-2717,ho-tro-sinh-vien,Có nhu cầu tuyển dụng sv mới tra trường,không phải câu hỏi của sinh viên
 VHU-2719,ho-tro-sinh-vien,Đăng thông tin tuyển dụng,không phải câu hỏi của sinh viên
 VHU-2739,ho-tro-sinh-vien,Cần liên hệ tuyển dung,không khớp từ khóa
 VHU-2742,ho-tro-sinh-vien,Muốn đăng thông tin tuyển dụng,không phải câu hỏi của sinh viên
 VHU-2782,ho-tro-sinh-vien,Cần liên hệ thầy hiệu trưởng,không khớp từ khóa
 VHU-2816,ho-tro-sinh-vien,Đã đóng học phí HK3 nhưng kiểm tra portal thấy thiếu 2 môn học trong khi lớp học phần hủy không có 2 môn này,nhiều chủ đề: HOC_PHI+LICH_HOC
+VHU-2822,ho-tro-sinh-vien,Phu huynh thắc mắc về tour miên Tây của SV khoa quản trị dịch vụ du lịch và lữ hành,không khớp từ khóa
 VHU-2833,ho-tro-sinh-vien,Muốn hủy học phàn,không khớp từ khóa
 VHU-2852,ho-tro-sinh-vien,Liên hệ làm phim tư liệu về kỉ niệm 20 năm thành lập trường,không khớp từ khóa
 VHU-2924,ho-tro-sinh-vien,Hợp tác tuyển dụnng,không phải câu hỏi của sinh viên
@@ -459,6 +466,7 @@ VHU-6510,ho-tro-sinh-vien,ngày mai nộp bài thu hoạch được không,khôn
 VHU-6513,ho-tro-sinh-vien,"Tìm hiểu thông tin đóng học phí KNM, bảo hiểm y tế",nhiều chủ đề: HOC_PHI+KHAC
 VHU-6520,ho-tro-sinh-vien,Xin số điện thoại P.QLĐT,không khớp từ khóa
 VHU-6539,ho-tro-sinh-vien,"Phụ huynh phản ánh vì sao sinh viên chỉ học 1 tuần 1 buổi chuyên ngành tốn quá nhiều chi phí thuê trọ, ăn uống đi lại",không khớp từ khóa
+VHU-6542,ho-tro-sinh-vien,Tìm hiểu thông tin vải may áo dài của SV khoa du lịch,không khớp từ khóa
 VHU-6543,ho-tro-sinh-vien,Tìm hiểu địa chỉ cũ của trường,không khớp từ khóa
 VHU-6545,ho-tro-sinh-vien,Giải đáp thông tin liên quan đến BHXH,không khớp từ khóa
 VHU-6547,ho-tro-sinh-vien,SV bị mất biên lai học phí sợ không nhận được thẻ BHYT,nhiều chủ đề: HOC_PHI+KHAC
@@ -482,6 +490,7 @@ VHU-6684,ho-tro-sinh-vien,Cần liên hệ thông tin tuyển dụng,không ph�
 VHU-6695,ho-tro-sinh-vien,Số điện thoại của P.TC,không khớp từ khóa
 VHU-6699,ho-tro-sinh-vien,Thông tin tài khoản để đóng học phí,nhiều chủ đề: HOC_PHI+KHAC
 VHU-6705,ho-tro-sinh-vien,Liên hệ thông tin hội bảo vệ Quyền trẻ em,không khớp từ khóa
+VHU-6727,ho-tro-sinh-vien,SV cần liên hệ khoa du lịch để đăng ký vải áo dài,không khớp từ khóa
 VHU-6739,ho-tro-sinh-vien,SV thắc mắc về việc nghỉ tránh bão Taebin,không khớp từ khóa
 VHU-6759,ho-tro-sinh-vien,Thời gian làm việc của nhà trường,không khớp từ khóa
 VHU-6777,ho-tro-sinh-vien,SV cần liên hệ thầy Thái - KNM,không khớp từ khóa
@@ -493,6 +502,7 @@ VHU-6886,ho-tro-sinh-vien,Số điện thoại liên hệ P.CTSV,không khớp t
 VHU-6954,ho-tro-sinh-vien,"Sinh viên thắc mắc về vấn đề học phí phải đóng trên portal, đã mua BHYT với gia đình nhưng hiển thị nợ BHYT",nhiều chủ đề: HOC_PHI+KHAC
 VHU-6967,ho-tro-sinh-vien,Thời gian làm việc của P.TC,không khớp từ khóa
 VHU-6978,ho-tro-sinh-vien,SV không tham gia gặp mặt CVHT được không?,không khớp từ khóa
+VHU-6985,ho-tro-sinh-vien,SV hỏi thông tin về việc nghỉ tết dương lịch,không khớp từ khóa
 VHU-6994,ho-tro-sinh-vien,Phụ huynh liên hệ số P.QLĐT không được,không khớp từ khóa
 VHU-7004,ho-tro-sinh-vien,Đã đến cơ sở nhưng không biết phòng học,nhiều chủ đề: KHAC+LICH_HOC
 VHU-7030,ho-tro-sinh-vien,K14 đã hoàn thành chương trình đào tạo còn chờ điểm thi HK1 và còn bổ sung KNM nhưng nhận được tin nhắn đóng học phí và không vào portal được,nhiều chủ đề: HOC_PHI+LICH_THI+QUY_CHE
@@ -507,6 +517,7 @@ VHU-7253,ho-tro-sinh-vien,SV trao đổi du học Hàn Quốc không đăng ký 
 VHU-7279,ho-tro-sinh-vien,Xin lại SĐT P.QLĐT,không khớp từ khóa
 VHU-7284,ho-tro-sinh-vien,SV xin số P.QLĐT,không khớp từ khóa
 VHU-7298,ho-tro-sinh-vien,Cần liên hệ P.CTSV,không khớp từ khóa
+VHU-7317,ho-tro-sinh-vien,"SV Khoa Du lịch chưa nhận được phù hiệu, cà vạt bây giờ có thể nhận được không",không khớp từ khóa
 VHU-7328,ho-tro-sinh-vien,SV muốn xin thông tin liên hệ của Giảng viên,không khớp từ khóa
 VHU-7355,ho-tro-sinh-vien,Cần liên hệ tuyển dụng sinh viên ngành Ngôn ngữ Trung,không phải câu hỏi của sinh viên
 VHU-7445,ho-tro-sinh-vien,SV trúng thưởng xe Sirius vẫn chưa được nhận giải,không khớp từ khóa
@@ -522,6 +533,7 @@ VHU-8027,ho-tro-sinh-vien,Không thể liên hệ được với QLDT,không kh�
 VHU-8034,ho-tro-sinh-vien,sinh viên không gọi được số điện thoại hotline,không khớp từ khóa
 VHU-8035,ho-tro-sinh-vien,Sinh viên mới đóng tiền học phí và chưa có lịch thi,nhiều chủ đề: HOC_PHI+LICH_THI
 VHU-8036,ho-tro-sinh-vien,Không liên lạc được với QLDT,không khớp từ khóa
+VHU-8058,ho-tro-sinh-vien,xin sđt khoa Du lịch,không khớp từ khóa
 VHU-8077,ho-tro-sinh-vien,đóng tiền nhưng vẫn chưa có lịch thi,nhiều chủ đề: HOC_PHI+LICH_THI
 VHU-8111,ho-tro-sinh-vien,Xin sdt VPĐH,không khớp từ khóa
 VHU-8122,ho-tro-sinh-vien,sinh viên đóng tiền chưa có lịch thi,nhiều chủ đề: HOC_PHI+LICH_THI
@@ -673,6 +685,7 @@ VHU-17692,ho-tro-sinh-vien,gọi cho sinh viên có việc gì không?,không kh
 VHU-17723,ho-tro-sinh-vien,ngày nào đi học chính thức,không khớp từ khóa
 VHU-17724,ho-tro-sinh-vien,kích hoạt MSSV,không khớp từ khóa
 VHU-17725,ho-tro-sinh-vien,mất bằng đại học - xin cấp lại,không khớp từ khóa
+VHU-17745,ho-tro-sinh-vien,áo dài khoa du lịch mua ở đâu,không khớp từ khóa
 VHU-17764,ho-tro-sinh-vien,Phụ huynh thắc mắc về gói quà tặng của SV khi nào phát,không khớp từ khóa
 VHU-17772,ho-tro-sinh-vien,Cần liên hệ sinh viên hỗ trợ trải nghiệm dòng xe mới,không khớp từ khóa
 VHU-17781,ho-tro-sinh-vien,Thông tin khi nào trường tổ chức lễ Khai giảng,không khớp từ khóa
@@ -734,6 +747,7 @@ VHU-18440,ho-tro-sinh-vien,SV liên hệ hỏi lại về Giấy CNTN tạm th�
 VHU-18485,ho-tro-sinh-vien,trường có thông báo cho sinh viên nghỉ không?,không khớp từ khóa
 VHU-18499,ho-tro-sinh-vien,xem thông tin sinh viên ở đâu,không khớp từ khóa
 VHU-18507,ho-tro-sinh-vien,phụ huynh muốn biết thông tin sinh viên,không khớp từ khóa
+VHU-18515,ho-tro-sinh-vien,hôm nay văn phòng khoa du lịch có làm việc không?,không khớp từ khóa
 VHU-18563,ho-tro-sinh-vien,Địa điểm học - học phí - QTKD(Thạc sĩ),nhiều chủ đề: HOC_PHI+LICH_HOC
 VHU-18575,ho-tro-sinh-vien,Đã làm thủ tục nhập học hệt cao đẳng ngày hôm qua nhưng vẫn chưa thấy được TKB,nhiều chủ đề: KHAC+LICH_HOC
 VHU-18577,ho-tro-sinh-vien,liên hệ NNTH,không khớp từ khóa
@@ -787,7 +801,8 @@ VHU-19090,ho-tro-sinh-vien,"sinh viên bị bệnh, viết đơn xin phép như 
 VHU-19183,ho-tro-sinh-vien,lịch nghỉ tết,mơ hồ
 VHU-19184,ho-tro-sinh-vien,số điện thoại HTDN,không khớp từ khóa
 VHU-19188,ho-tro-sinh-vien,Cập nhật lại ngày cấp CMND,không khớp từ khóa
-VHU-19202,ho-tro-sinh-vien,Doanh nghiệp muốn xin đăẹt gian hàng ở lễ hội Hallowen ở Đầm Sen,không phải câu hỏi của sinh viên
+VHU-19202,ho-tro-sinh-vien,Doanh nghiệp muốn xin đăẹt gian hàng ở lễ hội Hallowen ở Đầm Sen,không khớp từ khóa
+VHU-19212,ho-tro-sinh-vien,liên hệ khoa du lịch,không khớp từ khóa
 VHU-19227,ho-tro-sinh-vien,số điện thoại khoa KTCN,không khớp từ khóa
 VHU-19255,ho-tro-sinh-vien,Liên hệ cô Thảo P.QLĐT,không khớp từ khóa
 VHU-19279,ho-tro-sinh-vien,lịch nghr học,mơ hồ
@@ -1001,6 +1016,7 @@ VHU-22198,ho-tro-sinh-vien,thông tin liên thông,không khớp từ khóa
 VHU-22209,ho-tro-sinh-vien,thạc sĩ,không khớp từ khóa
 VHU-22227,ho-tro-sinh-vien,Không có tên trong danh sách,không khớp từ khóa
 VHU-22229,ho-tro-sinh-vien,liên thông,không khớp từ khóa
+VHU-22250,ho-tro-sinh-vien,liên hê khoa du lịch,không khớp từ khóa
 VHU-22269,ho-tro-sinh-vien,đăng ký KNM,không khớp từ khóa
 VHU-22277,ho-tro-sinh-vien,Chuyển ngành thực tập,nhiều chủ đề: DO_AN+QUY_CHE
 VHU-22289,ho-tro-sinh-vien,liên hệ hợp tác doanh nghiệo,không phải câu hỏi của sinh viên
@@ -1011,7 +1027,6 @@ VHU-22410,ho-tro-sinh-vien,đóng hoc phí,không khớp từ khóa
 VHU-22445,ho-tro-sinh-vien,Liên hệ về phòng vấn,không khớp từ khóa
 VHU-22459,ho-tro-sinh-vien,đăng ký hội trại,không khớp từ khóa
 VHU-22522,ho-tro-sinh-vien,Kh có tên trong danh sách,không khớp từ khóa
-VHU-22532,ho-tro-sinh-vien,học phần Hoc kỳ doanh nghiệp không đăng ký được,không phải câu hỏi của sinh viên
 VHU-22550,ho-tro-sinh-vien,Nộp hcoj phí,không khớp từ khóa
 VHU-22557,ho-tro-sinh-vien,cập nhật tên trong danh sách,không khớp từ khóa
 VHU-22567,ho-tro-sinh-vien,cập nhật danh sách,không khớp từ khóa
@@ -1044,7 +1059,6 @@ VHU-22938,ho-tro-sinh-vien,Học sinh muốn tham quan trường,không khớp t
 VHU-22963,ho-tro-sinh-vien,Phụ huynh muốn biết thông tin sinh viên đang còn học tại trường không?,không khớp từ khóa
 VHU-23037,ho-tro-sinh-vien,kiểm tra tình hình của sinh viên,không khớp từ khóa
 VHU-23041,ho-tro-sinh-vien,Xin địa chỉ liên hệ Trung Tâm,không khớp từ khóa
-VHU-23060,ho-tro-sinh-vien,có BHYT của doanh nghiệp thì có hủy BHYT của trường được không?,không phải câu hỏi của sinh viên
 VHU-23172,ho-tro-sinh-vien,Trung Tâm khi nào làm việc lại,không khớp từ khóa
 VHU-23186,ho-tro-sinh-vien,Xác minh có học tại trường khóa 2012 - 2016,không khớp từ khóa
 VHU-23188,ho-tro-sinh-vien,Lệ phí chuyển điểm đến trường Văn Hiến,nhiều chủ đề: HOC_PHI+QUY_CHE
@@ -1295,6 +1309,7 @@ VHU-7089,khac,Hủy nhạc chờ,không phải câu hỏi của sinh viên
 VHU-7114,khac,Ngân hàng Shinhanbank,không khớp từ khóa
 VHU-7142,khac,Cần liên hệ gửi công văn về tuyển dụng sinh viên,không phải câu hỏi của sinh viên
 VHU-7178,khac,Tìm hiểu thông tin trường,không khớp từ khóa
+VHU-7191,khac,Cần liên hệ P.Kế toán về thanh khoản thông tin đăng tải trên Những trang vàng du lịch Việt Nam,không khớp từ khóa
 VHU-7221,khac,Thông tin NH Shinhanbank,không khớp từ khóa
 VHU-7292,khac,Hỏi thông tin về giao thông,không khớp từ khóa
 VHU-7301,khac,Thông tin hệ VHVL,không khớp từ khóa
@@ -1388,7 +1403,7 @@ VHU-19179,khac,XIn hình chụp hội thảo,không khớp từ khóa
 VHU-19280,khac,"trường có gửi công văn đào tạo sinh viên khởi nghiệp qua bưu điện, không biết đã nhận được chưa",không khớp từ khóa
 VHU-19382,khac,mở nhạc quá lớn,không khớp từ khóa
 VHU-19385,khac,Dân cư phản ánh sự kiện khai giảng của trường ồn ảnh hưởng,không khớp từ khóa
-VHU-19432,khac,đơn vị liên hệ hợp tac doanh nghiệp,không phải câu hỏi của sinh viên
+VHU-19432,khac,đơn vị liên hệ hợp tac doanh nghiệp,không khớp từ khóa
 VHU-19511,khac,Linh tinh,không khớp từ khóa
 VHU-19566,khac,Test hệ thống,không khớp từ khóa
 VHU-19595,khac,Liên hệ hợp tác tuyển dụng,không phải câu hỏi của sinh viên
@@ -1431,6 +1446,7 @@ VHU-23535,khac,SĐT trung tâm hợp tác doanh nghiệp,không phải câu hỏ
 VHU-23536,khac,Thắc mắc về KNM còn thiếu,không khớp từ khóa
 VHU-23576,khac,t7 trung tâm có làm việc k,không khớp từ khóa
 VHU-23667,khac,số điện thoại giảng viên,không khớp từ khóa
+VHU-23695,khac,Cần liên hệ Khoa Du lịch,không khớp từ khóa
 VHU-23721,khac,khách Malaysia muốn liên hệ với phòng hợp tác quốc tế,không phải câu hỏi của sinh viên
 VHU-23751,khac,liên hệ P.Truyền thông,không khớp từ khóa
 VHU-23752,khac,liên hệ khoa nghệ thuật,không khớp từ khóa
@@ -1589,3 +1605,7 @@ UIT-153883,cat62,Rút tiền học phí bị dư trong tài khoản định danh
 UIT-153888,cat1,Thắc mắc về việc bị từ chối cứu xét,không khớp từ khóa
 UIT-154386,cat62,Vấn đề về số tiền dư trong tài khoản định danh,nhiều chủ đề: HOC_PHI+KHAC
 UIT-163579,cat13,Thắc mắc về ưu nhược điểm khi học chương trình tài năng khoa KHMT?,không khớp từ khóa
+UIT-151364,uit-tam-su,Ra trường đi làm có cần nộp bằng tiếng anh cho công ty mình làm sau này hay không?,không phải câu hỏi của sinh viên
+UIT-150684,uit-linh-tinh,Xin review về công ty soXes GmbH.,không phải câu hỏi của sinh viên
+UIT-158408,uit-viec-lam-them,(Tân Phú) - CTCP LeAssociates tuyển dụng tư vấn viên mỹ phẩm partime,không phải câu hỏi của sinh viên
+UIT-150963,uit-viec-lam-them,Tiệm photocopy - cà phê Hoàng Gia cần tuyển sv làm thêm theo ca,không phải câu hỏi của sinh viên

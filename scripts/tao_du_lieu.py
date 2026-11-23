@@ -12,11 +12,13 @@ Gán nhãn:
 - Câu trong file Word đã có nhãn gốc -> ánh xạ sang 7 nhãn bằng bảng ANH_XA (+ sửa riêng từng câu ở SUA_RIENG).
 - Ticket trên web chưa có nhãn -> gán theo từ khóa (TU_KHOA), rồi nhóm rà lại. Câu không khớp từ khóa nào
   (quá mơ hồ, ví dụ "Tìm hiểu thông tin") hoặc khớp nhiều chủ đề ngang nhau (nhiều ý) bị loại.
+- Câu trong chuyên mục đời sống của UIT forum không khớp từ khóa học vụ nào -> KHAC (ngoài phạm vi).
 - Cột `nhom`: các câu là biến thể của cùng một câu gốc có chung `nhom`, để kiểm định chéo không chia
   chúng vào các fold khác nhau (tránh rò rỉ).
 
 Chạy:  python scripts/tao_du_lieu.py
 """
+import hashlib
 import re
 import sys
 import unicodedata
@@ -32,7 +34,7 @@ from preprocess import bo_dau  # noqa: E402
 
 RAW = ROOT / "data" / "raw"
 SEED = 42
-TOI_DA_MOI_NHAN = 400  # số câu web tối đa mỗi nhãn (lấy ngẫu nhiên), để các nhãn không chênh lệch quá nhiều
+TOI_DA_MOI_NHAN = 400  # số ticket VHU tối đa mỗi nhãn (lấy ngẫu nhiên), để các nhãn không chênh lệch quá nhiều
 
 # ------------------------------------------------------------------ 1. File Word: ánh xạ nhãn gốc
 BO = None  # loại khỏi dữ liệu (không thuộc chủ đề nào của dự án, cũng không phải câu hỏi ngoài phạm vi rõ ràng)
@@ -89,12 +91,12 @@ def tu_docx() -> pd.DataFrame:
 # "khóa luận tốt nghiệp" chỉ tính DO_AN, không tính thêm "tốt nghiệp".
 # Viết có dấu; câu không dấu được so với bản bỏ dấu của từ khóa.
 TU_KHOA = [
-    ("LOAI", 3, ["công ty", "cty", "doanh nghiệp", "cần tuyển", "tuyển thực tập", "tìm sinh viên", "hợp tác",
+    ("LOAI", 3, ["công ty", "cty", "cần tuyển", "tuyển thực tập", "tìm sinh viên", "hợp tác",
                  "đối tác", "khách hàng", "quảng cáo", "nhạc chờ", "tuyển dụng", "cuộc thi", "thi đấu", "hội thao"]),
     (None, 0, ["địa điểm", "thời điểm", "điểm chuẩn", "điểm ưu tiên", "điểm cộng", "điểm sàn", "điểm xét tuyển",
                "điểm thi đại học", "điểm thi tsđh", "thi đại học", "thi tuyển sinh", "lịch sinh hoạt",
                "lịch làm việc", "lịch công tác", "nghỉ học tạm thời", "thông tin", "ưu nhược điểm", "ưu điểm",
-               "nhược điểm", "điểm mạnh", "điểm yếu"]),
+               "nhược điểm", "điểm mạnh", "điểm yếu", "du lịch", "dương lịch", "âm lịch", "lịch sử"]),
     ("KHAC", 3, ["thi b1", "thi b2", "thi c1", "thi a2", "thi tin học", "thi ngoại ngữ", "thi anh văn", "thi tin",
                  "thi chứng chỉ", "thi tiếng nhật", "thi toeic", "kết quả thi b1", "điểm thi c1", "điểm thi b1",
                  "lịch thi tin học", "lịch thi ngoại ngữ", "trung tâm ngoại ngữ", "xác minh văn bằng",
@@ -209,11 +211,20 @@ def gan_nhan(text: str):
     return nhan, ""
 
 
+# Chuyên mục đời sống của UIT forum (tán gẫu, tâm sự, chỗ trọ, việc làm thêm): câu không khớp từ khóa học vụ
+# nào là câu hỏi NGOÀI PHẠM VI thật của sinh viên -> KHAC. Câu khớp từ khóa học vụ vẫn gán theo từ khóa.
+CHUYEN_MUC_NGOAI_PHAM_VI = {"uit-linh-tinh", "uit-tam-su", "uit-cho-tro", "uit-viec-lam-them"}
+# Chỉ giới hạn số câu của VHU (nguồn chiếm đa số); câu của UIT, HLU giữ hết.
+TRUONG_GIOI_HAN = {"VHU"}
+
+
 def tu_web():
     w = pd.read_csv(RAW / "web_ticket.csv", dtype=str, keep_default_na=False)
     kq = w.text.map(gan_nhan)
     w["label"] = [k[0] for k in kq]
     w["ghi_chu"] = [k[1] for k in kq]
+    doi_song = w.chuyen_muc.isin(CHUYEN_MUC_NGOAI_PHAM_VI) & (w.ghi_chu == "không khớp từ khóa")
+    w.loc[doi_song, ["label", "ghi_chu"]] = ["KHAC", ""]
     bi_loai = w[w.label.isna()]
     w = w[w.label.notna()].copy()
     so_gan = len(w)
@@ -222,9 +233,13 @@ def tu_web():
     w["nhom"] = w.ma
     w["multi_intent"] = 0
     w["annotator"] = "tu_khoa"
-    # Giới hạn số câu mỗi nhãn (lấy ngẫu nhiên, cố định seed)
-    w = (w.sample(frac=1, random_state=SEED).groupby("label", group_keys=False).head(TOI_DA_MOI_NHAN)
-         .sort_values("ma"))
+    w.loc[doi_song[w.index], "annotator"] = "chuyen_muc"
+    # Giới hạn số câu mỗi nhãn: chọn theo mã băm của id (ngẫu nhiên nhưng ỔN ĐỊNH — sửa nhãn vài câu
+    # chỉ ảnh hưởng đúng các câu đó, không làm xáo trộn cả tập, nên tập test đã đóng băng vẫn giữ nguyên)
+    w["_bam"] = w.ma.map(lambda m: hashlib.md5(f"{SEED}-{m}".encode()).hexdigest())
+    gioi_han = w[w.truong.isin(TRUONG_GIOI_HAN)]
+    gioi_han = gioi_han.sort_values("_bam").groupby("label", group_keys=False).head(TOI_DA_MOI_NHAN)
+    w = pd.concat([gioi_han, w[~w.truong.isin(TRUONG_GIOI_HAN)]]).drop(columns="_bam").sort_values("ma")
     return w, bi_loai, so_gan
 
 
@@ -246,7 +261,7 @@ def main():
     anh_xa.to_csv(RAW / "bang_anh_xa_nhan.csv", index=False)
 
     print(pd.crosstab(tat_ca.label, tat_ca.source, margins=True, margins_name="Tổng"))
-    print(f"\nWeb: gán được {so_gan} ticket, giữ {len(w)} sau khi giới hạn {TOI_DA_MOI_NHAN} câu/nhãn; "
+    print(f"\nWeb: gán được {so_gan} ticket, giữ {len(w)} sau khi giới hạn {TOI_DA_MOI_NHAN} ticket VHU/nhãn; "
           f"loại {len(bi_loai)} (lý do: "
           + ", ".join(f"{k} {v}" for k, v in bi_loai.ghi_chu.str.split(":").str[0].value_counts().items()) + ")")
     print(f"Đã lưu data/questions.csv ({len(tat_ca)} câu), data/raw/web_bi_loai.csv, data/raw/bang_anh_xa_nhan.csv")
