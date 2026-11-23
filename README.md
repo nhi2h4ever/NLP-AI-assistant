@@ -27,7 +27,11 @@ Hệ thống bám theo Quy trình *Tiếp nhận và giải quyết thắc mắc
 |---|---|---|---|
 | 1. Tiếp nhận | Trực tiếp tại bộ phận một cửa, email, trang fr.dut.udn.vn | Trong ngày | Trang Hỏi đáp nhận câu hỏi, ghi nhật ký |
 | 2. Tổng hợp, phân loại | Chuyên viên P.CTSV đọc, phân loại theo đơn vị liên quan, chuyển tiếp | 1 ngày sau khi nhận | **Mô hình ML phân loại và chuyển ngay**; câu chưa chắc chắn → chuyên viên P.CTSV |
-| 3. Thông báo kết quả | Chuyên viên trả lời qua email / fr.dut.udn.vn | 1–3 ngày | Sinh viên được báo phòng ban, liên hệ và thời hạn phản hồi (3 ngày làm việc; câu ngoài phạm vi 1–2 ngày) |
+| 3. Thông báo kết quả | Chuyên viên trả lời qua email / fr.dut.udn.vn | 1–3 ngày | Sinh viên nhận **mã yêu cầu**, phòng ban, liên hệ và thời hạn phản hồi (3 ngày làm việc; câu ngoài phạm vi 1–2 ngày). Chuyên viên nhập câu trả lời trên trang Quản trị; sinh viên xem câu trả lời ở trang **Tra cứu phản hồi** bằng mã yêu cầu |
+
+**Vì sao không hỏi họ tên, MSSV?**
+- Câu hỏi được ghi nhật ký, hiển thị trên trang Quản trị và dùng để huấn luyện lại. Vì vậy hệ thống không thu thập thông tin cá nhân, và tự ẩn MSSV, số điện thoại, email nếu sinh viên lỡ nhập (theo tinh thần Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân).
+- Sinh viên nhận câu trả lời bằng **mã yêu cầu** ngẫu nhiên (8 ký tự) hiện ra sau khi gửi câu hỏi. Trang Hỏi đáp có sẵn đường dẫn tới trang Tra cứu phản hồi cho đúng mã đó.
 
 ## Dữ liệu
 
@@ -74,6 +78,7 @@ training.py            các hàm ML pipeline (Step 1–2)
 router.py              mô hình + chính sách quyết định (+ tìm FAQ ở giai đoạn 2)
 nhat_ky.py             nhật ký câu hỏi: CSV trên máy hoặc Google Sheets
 app.py                 Trang Hỏi đáp cho sinh viên (Streamlit)
+pages/0_Tra_cuu_phan_hoi.py  Trang Tra cứu phản hồi: sinh viên nhập mã yêu cầu để xem câu trả lời
 pages/1_Quan_tri.py    Trang Quản trị cho chuyên viên Phòng Công tác sinh viên
 notebooks/train.ipynb  notebook huấn luyện: dữ liệu → so sánh mô hình → tinh chỉnh → đánh giá → lưu model
 scripts/kiem_thu_kich_ban.py  13 kịch bản kiểm thử hệ thống (Step 3)
@@ -145,7 +150,7 @@ FAQ_ROUTER_DEMO=1 .venv/bin/streamlit run app.py
    - Chia sẻ Sheet (quyền Editor) cho email của service account.
    - Dán `sheet_url` và khóa JSON vào mục `[gcp_service_account]`.
    - Phải dùng Google Sheets vì file ghi trên máy chủ Streamlit Cloud có thể mất khi app khởi động lại.
-4. Gửi link app cho sinh viên dùng thử. Chuyên viên P.CTSV vào trang **Quan tri** để xem câu hỏi theo phòng ban, xử lý các câu cần phân loại thủ công và điền "Nhãn đúng".
+4. Gửi link app cho sinh viên dùng thử. Chuyên viên P.CTSV vào trang **Quan tri** để xem câu hỏi theo phòng ban, xử lý các câu cần phân loại thủ công, nhập **phản hồi** cho sinh viên và điền "Nhãn đúng". Sinh viên xem phản hồi ở trang **Tra cuu phan hoi** bằng mã yêu cầu.
 
 ## Huấn luyện lại (v1 → v2)
 

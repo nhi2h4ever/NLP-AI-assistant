@@ -49,6 +49,7 @@ def test_gd1_phan_loai_chuyen_phong_ban_va_danh_gia(tmp_path):
 
     [b for b in at.button if b.label.startswith("👍")][0].click().run()
     assert _doc_log(tmp_path).danh_gia[0] == "huu_ich"
+    assert any(m.value.startswith("Lưu lại mã yêu cầu") for m in at.caption), "phải nhắc sinh viên lưu mã yêu cầu"
 
 
 def test_gd2_tra_loi_tu_dong(tmp_path, monkeypatch):
@@ -93,3 +94,57 @@ def test_quan_tri_can_mat_khau(tmp_path):
 def test_quan_tri_chua_cau_hinh_mat_khau(tmp_path):
     at = _app("pages/1_Quan_tri.py", tmp_path)
     assert at.error and "admin_password" in at.error[0].value
+
+
+def test_quan_tri_quy_doi_ten_phong_ban_cu(tmp_path):
+    """Nhật ký cũ ghi "Phòng Khảo thí": trang Quản trị gộp về tên phòng ban hiện tại."""
+    nk = NhatKyCSV(tmp_path / "log.csv")
+    for ma, pb in [("b1", "Phòng Khảo thí"), ("b2", "Phòng Đào tạo và Bảo đảm chất lượng"),
+                   ("b3", "Phòng Công tác Sinh viên")]:
+        nk.ghi(tao_dong(ma, f"câu hỏi {ma}", KetQua(hanh_dong="chuyen_tiep", chu_de="LICH_THI", do_tin_cay=0.9,
+                                                     phong_ban=pb), "test"))
+    at = _app("pages/1_Quan_tri.py", tmp_path, admin_password="mk")
+    at.text_input[0].input("mk")
+    at.button[0].click().run()
+    assert not at.exception
+    assert set(at.multiselect[0].options) == {"Phòng Đào tạo và Bảo đảm chất lượng", "Phòng Công tác sinh viên"}
+
+
+def _log_tra_cuu(tmp_path):
+    nk = NhatKyCSV(tmp_path / "log.csv")
+    nk.ghi(tao_dong("0a1b2c3d", "Hạn đóng học phí kỳ này?", KetQua(hanh_dong="chuyen_tiep", chu_de="HOC_PHI",
+                                                                    do_tin_cay=0.9, phong_ban="Phòng Kế hoạch - Tài chính"), "test"))
+    nk.ghi(tao_dong("1a2b3c4d", "Gần trường có quán cơm nào ngon?", KetQua(hanh_dong="chuyen_tiep", chu_de="KHAC",
+                                                                          do_tin_cay=0.9, phong_ban="Phòng Công tác Sinh viên"), "test"))
+    nk.cap_nhat("0a1b2c3d", phan_hoi="Hạn đóng học phí là ngày 15/12.", thoi_gian_phan_hoi="2026-11-23 10:00:00")
+
+
+@pytest.mark.parametrize("ma, mong_doi", [
+    ("0A1B2C3D", "success"),   # đã có phản hồi (mã nhập chữ hoa vẫn tìm được)
+    ("1a2b3c4d", "info"),      # chưa có phản hồi -> báo đang xử lý + thời hạn
+    ("ffffffff", "error"),     # không có mã này
+    ("abc", "warning"),        # sai định dạng
+])
+def test_tra_cuu_phan_hoi(tmp_path, ma, mong_doi):
+    _log_tra_cuu(tmp_path)
+    at = _app("pages/0_Tra_cuu_phan_hoi.py", tmp_path)
+    assert not at.exception
+    at.text_input[0].input(ma)
+    at.button[0].click().run()
+    assert not at.exception
+    assert getattr(at, mong_doi), f"phải hiện {mong_doi}"
+    if mong_doi == "success":
+        assert "15/12" in at.success[0].value
+    if mong_doi == "info":
+        assert config.THOI_HAN_PHAN_HOI_KHAC in at.info[0].value
+        assert any("Phòng Công tác sinh viên" in m.value for m in at.markdown), "tên phòng ban cũ phải được quy đổi"
+
+
+def test_tra_cuu_tu_link_co_ma(tmp_path):
+    _log_tra_cuu(tmp_path)
+    at = AppTest.from_file(str(ROOT / "pages/0_Tra_cuu_phan_hoi.py"), default_timeout=180)
+    at.secrets["log_backend"] = "csv"
+    at.secrets["log_csv_path"] = str(tmp_path / "log.csv")
+    at.query_params["ma"] = "0a1b2c3d"
+    at.run()
+    assert not at.exception and at.success and "15/12" in at.success[0].value

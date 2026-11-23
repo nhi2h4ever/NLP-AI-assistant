@@ -1,12 +1,12 @@
 """Trang Quản trị cho chuyên viên Phòng Công tác sinh viên (đơn vị chủ trì theo QT_11_CTSV): câu hỏi theo phòng ban, câu cần phân loại thủ công, thống kê,
-sửa nhãn, xuất dữ liệu huấn luyện lại."""
+phản hồi cho sinh viên, sửa nhãn, xuất dữ liệu huấn luyện lại."""
 import hmac
 
 import pandas as pd
 import streamlit as st
 
 import config
-from nhat_ky import doc_secrets, du_lieu_huan_luyen_lai, tao_nhat_ky
+from nhat_ky import ban_ghi_phan_hoi, bay_gio, doc_secrets, du_lieu_huan_luyen_lai, tao_nhat_ky
 from router import CAN_PHAN_LOAI, TRA_LOI
 
 st.set_page_config(page_title="Quản trị – Trợ lý học vụ", page_icon="🛠️", layout="wide")
@@ -45,6 +45,7 @@ if df.empty:
     st.info("Chưa có câu hỏi nào trong nhật ký.")
     st.stop()
 
+df["phong_ban"] = df.phong_ban.map(config.ten_hien_tai)  # câu hỏi cũ ghi tên phòng ban trước khi đổi tên
 ten = {k: v[0] for k, v in config.NHAN.items()}
 df["ten_chu_de"] = df.chu_de.map(ten).fillna(df.chu_de)
 df["ngay"] = pd.to_datetime(df.thoi_gian, errors="coerce").dt.date
@@ -56,7 +57,7 @@ TEN_COT = {"id": "Mã", "thoi_gian": "Thời gian", "cau_hoi": "Câu hỏi", "te
 cau_hinh_cot = {**TEN_COT, "do_tin_cay": st.column_config.NumberColumn("Độ tin cậy", format="%.2f")}
 
 # ---------------- Chỉ số tổng quan
-c = st.columns(5)
+c = st.columns(6)
 c[0].metric("Tổng số câu hỏi", len(df))
 c[1].metric("Phân loại tự động", f"{(df.hanh_dong != CAN_PHAN_LOAI).mean():.0%}",
             help="Tỉ lệ câu có độ tin cậy ≥ τ, được chuyển thẳng đến phòng ban")
@@ -64,6 +65,8 @@ c[2].metric("Cần phân loại thủ công", int((df.hanh_dong == CAN_PHAN_LOAI
 c[3].metric("Đánh giá tích cực", f"{(da_danh_gia.danh_gia == 'huu_ich').mean():.0%}" if len(da_danh_gia) else "—",
             help=f"Trên {len(da_danh_gia)} lượt đánh giá của sinh viên")
 c[4].metric("Thời gian xử lý TB", f"{df.thoi_gian_xu_ly_ms.mean():.0f} ms")
+da_phan_hoi = df.phan_hoi.str.strip() != ""
+c[5].metric("Đã phản hồi", f"{int(da_phan_hoi.sum())}/{len(df)}", help="Số câu đã có phản hồi cho sinh viên")
 if config.TRA_LOI_TU_DONG:
     st.caption(f"Trả lời tự động bằng kho FAQ: {(df.hanh_dong == TRA_LOI).mean():.0%} số câu.")
 
@@ -103,6 +106,23 @@ bi_che = df[df.danh_gia == "khong_huu_ich"]
 if len(bi_che):
     st.subheader("Câu bị sinh viên đánh giá chưa đúng / không hữu ích")
     st.dataframe(bi_che[cot_bang + ["faq_id"]], hide_index=True, width="stretch", column_config=cau_hinh_cot)
+
+# ---------------- Phản hồi cho sinh viên (QT_11_CTSV, bước 3)
+st.subheader("Phản hồi cho sinh viên")
+st.caption("Nhập câu trả lời sau khi phòng ban đã xử lý rồi bấm Lưu. Sinh viên xem phản hồi tại trang "
+           "“Tra cuu phan hoi” bằng mã yêu cầu, không cần họ tên hay MSSV.")
+chi_chua = st.toggle("Chỉ hiện câu chưa phản hồi", value=True)
+ds_phan_hoi = df[~da_phan_hoi] if chi_chua else df
+cot_ph = ["id", "thoi_gian", "cau_hoi", "phong_ban", "phan_hoi"]
+bang_ph = st.data_editor(
+    ds_phan_hoi[cot_ph].sort_values("thoi_gian", ascending=False), hide_index=True, width="stretch",
+    disabled=cot_ph[:-1], key="phan_hoi",
+    column_config={**cau_hinh_cot, "phan_hoi": st.column_config.TextColumn("Phản hồi", max_chars=2000, width="large")})
+cap_nhat_ph = ban_ghi_phan_hoi(bang_ph, df, bay_gio())
+if st.button(f"💾 Lưu phản hồi ({len(cap_nhat_ph)} câu)", disabled=not cap_nhat_ph):
+    nhat_ky.cap_nhat_nhieu(cap_nhat_ph)
+    st.success(f"Đã lưu phản hồi cho {len(cap_nhat_ph)} câu.")
+    st.rerun()
 
 # ---------------- Sửa nhãn
 st.subheader("Gán nhãn đúng (dùng để huấn luyện lại)")

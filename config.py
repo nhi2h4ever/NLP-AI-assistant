@@ -74,7 +74,17 @@ PHONG_BAN_XEM_LAI = DON_VI_CHU_TRI
 THOI_HAN_PHAN_HOI = "trong 3 ngày làm việc"
 THOI_HAN_PHAN_HOI_KHAC = "trong 1–2 ngày làm việc"
 
-_thieu = ({pb for _, pb in NHAN.values()} | {PHONG_BAN_XEM_LAI}) - set(PHONG_BAN)
+# Tên phòng ban CŨ có thể còn trong nhật ký (câu hỏi ghi trước khi đổi sang danh bạ chính thức) -> tên hiện tại.
+# Nhật ký giữ nguyên lịch sử; trang Quản trị quy đổi khi hiển thị để thống kê và bộ lọc không bị tách đôi.
+TEN_PHONG_BAN_CU = {
+    "Phòng Đào tạo": "Phòng Đào tạo và Bảo đảm chất lượng",
+    "Phòng Khảo thí": "Phòng Đào tạo và Bảo đảm chất lượng",
+    "Phòng Khảo thí và Đảm bảo chất lượng giáo dục": "Phòng Đào tạo và Bảo đảm chất lượng",
+    "Phòng Công tác Sinh viên": "Phòng Công tác sinh viên",
+    "Phòng Tài chính": "Phòng Kế hoạch - Tài chính",
+}
+
+_thieu = ({pb for _, pb in NHAN.values()} | {PHONG_BAN_XEM_LAI} | set(TEN_PHONG_BAN_CU.values())) - set(PHONG_BAN)
 if _thieu:
     raise ValueError(f"Phòng ban chưa khai báo trong PHONG_BAN: {_thieu}")
 
@@ -82,6 +92,11 @@ if _thieu:
 def phong_ban(nhan: str) -> str:
     """Phòng ban phụ trách một chủ đề."""
     return NHAN[nhan][1]
+
+
+def ten_hien_tai(ten_phong_ban: str) -> str:
+    """Quy đổi tên phòng ban cũ (trong nhật ký) sang tên hiện tại; tên đã đúng thì giữ nguyên."""
+    return TEN_PHONG_BAN_CU.get(ten_phong_ban, ten_phong_ban)
 
 
 def lien_he(ten_phong_ban: str) -> str:

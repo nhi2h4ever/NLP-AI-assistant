@@ -38,7 +38,8 @@ with st.sidebar:
         st.write("Trợ lý tự động phân loại câu hỏi học vụ và chuyển đến đúng phòng ban phụ trách.")
     st.markdown("**Chủ đề → phòng ban phụ trách:**\n" + "\n".join(
         f"- {ten} → {pb}" for ma, (ten, pb) in config.NHAN.items() if ma != config.NHAN_KHAC))
-    st.caption("Vui lòng không nhập họ tên, MSSV, số điện thoại; nếu có, hệ thống tự ẩn trước khi lưu.")
+    st.caption("Vui lòng không nhập họ tên, MSSV, số điện thoại; nếu có, hệ thống tự ẩn trước khi lưu. "
+               "Bạn xem câu trả lời bằng mã yêu cầu ở trang “Tra cuu phan hoi”.")
     st.caption(f"Phiên bản model: {router.phien_ban}")
 
 st.title("🎓 Trợ lý học vụ")
@@ -78,6 +79,10 @@ if "ket_qua" in st.session_state:
             st.info(f"{kq.thong_bao} Mã yêu cầu: **{ma}**")
             st.caption(f"⏱ Thời hạn phản hồi: {kq.thoi_han} "
                        f"(theo Quy trình {config.QUY_TRINH} – Tiếp nhận và giải quyết thắc mắc cho sinh viên).")
+            st.caption("Lưu lại mã yêu cầu: khi phòng ban trả lời, bạn xem phản hồi bằng mã này "
+                       "(không cần họ tên hay MSSV).")
+            st.page_link("pages/0_Tra_cuu_phan_hoi.py", label="Tra cứu phản hồi cho mã này", icon="🔎",
+                         query_params={"ma": ma})
 
         danh_gia = st.session_state.setdefault("da_danh_gia", {})
         if kq.hanh_dong == CAN_PHAN_LOAI:
