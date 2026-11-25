@@ -13,3 +13,6 @@ logs/
 # triển khai bản demo lên Streamlit Cloud (Secrets: FAQ_ROUTER_DEMO = "1").
 reports/demo/
 data/sample/splits/
+
+# File hệ thống của macOS
+.DS_Store

@@ -38,11 +38,12 @@ def test_chon_nguong():
     assert bang.set_index("tau").loc[0.65, "precision"] == 1.0
 
 
-def test_chon_mo_hinh_uu_tien_lr():
+def test_chon_mo_hinh_cao_nhat():
     bang = pd.DataFrame({"Mô hình": T.MO_HINH, "Macro-F1 (CV)": [0.80, 0.85, 0.86]})
+    ten, ly_do = T.chon_mo_hinh(bang)
+    assert ten == "Linear SVM" and "Logistic Regression" in ly_do
+    bang.loc[1, "Macro-F1 (CV)"] = 0.90
     assert T.chon_mo_hinh(bang)[0] == "Logistic Regression"
-    bang.loc[2, "Macro-F1 (CV)"] = 0.90
-    assert T.chon_mo_hinh(bang)[0] == "Linear SVM"
 
 
 def test_kiem_dinh_cheo_giu_bien_the_cung_nhom_trong_mot_fold(du_lieu_mau):

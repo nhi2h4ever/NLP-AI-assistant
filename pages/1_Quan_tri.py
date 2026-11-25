@@ -57,7 +57,7 @@ TEN_COT = {"id": "Mã", "thoi_gian": "Thời gian", "cau_hoi": "Câu hỏi", "te
 cau_hinh_cot = {**TEN_COT, "do_tin_cay": st.column_config.NumberColumn("Độ tin cậy", format="%.2f")}
 
 # ---------------- Chỉ số tổng quan
-c = st.columns(6)
+c = st.columns(3) + st.columns(3)  # 2 hàng × 3 chỉ số, để tên chỉ số không bị cắt
 c[0].metric("Tổng số câu hỏi", len(df))
 c[1].metric("Phân loại tự động", f"{(df.hanh_dong != CAN_PHAN_LOAI).mean():.0%}",
             help="Tỉ lệ câu có độ tin cậy ≥ τ, được chuyển thẳng đến phòng ban")
@@ -117,7 +117,10 @@ cot_ph = ["id", "thoi_gian", "cau_hoi", "phong_ban", "phan_hoi"]
 bang_ph = st.data_editor(
     ds_phan_hoi[cot_ph].sort_values("thoi_gian", ascending=False), hide_index=True, width="stretch",
     disabled=cot_ph[:-1], key="phan_hoi",
-    column_config={**cau_hinh_cot, "phan_hoi": st.column_config.TextColumn("Phản hồi", max_chars=2000, width="large")})
+    column_order=["id", "cau_hoi", "phan_hoi", "phong_ban", "thoi_gian"],  # cột cần gõ đứng ngay sau câu hỏi
+    column_config={**cau_hinh_cot, "cau_hoi": st.column_config.TextColumn("Câu hỏi", width="medium"),
+                   "phan_hoi": st.column_config.TextColumn("Phản hồi (bấm đúp để gõ)", max_chars=2000,
+                                                           width="large")})
 cap_nhat_ph = ban_ghi_phan_hoi(bang_ph, df, bay_gio())
 if st.button(f"💾 Lưu phản hồi ({len(cap_nhat_ph)} câu)", disabled=not cap_nhat_ph):
     nhat_ky.cap_nhat_nhieu(cap_nhat_ph)

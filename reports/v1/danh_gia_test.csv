@@ -1,2 +1,2 @@
 Tập,Số câu,Accuracy,Macro-F1,Accuracy theo phòng ban,Recall lớp KHAC,Tỉ lệ xử lý tự động,Precision xử lý tự động,Macro-F1 câu không dấu
-Test,446,0.937,0.952,0.951,0.884,0.798,0.955,0.924
+Test,446,0.93,0.946,0.953,0.874,0.8,0.958,0.931

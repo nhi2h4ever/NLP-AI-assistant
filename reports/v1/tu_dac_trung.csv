@@ -1,11 +1,11 @@
 DO_AN,HOC_BONG,HOC_PHI,KHAC,LICH_HOC,LICH_THI,QUY_CHE
-thuc,bon, phi,tuy,học ,thi ,chuy
- tap,bong,phi, tuy,ọc ,thi, luu
-tap, bon,phi ,in_h,phan, thi,luu
-p , bo,phi_,hap,bieu,hi ,luu 
-luan,bo,ph,hap ,hoc,hi,ra 
-lu,iam ,dong, tin,hoc ,khao,huy
-tap ,giam,_phí,nhap, pha,hao,ngh
-lua,iam,hi_,t ,pha,diem,u 
-huc ,bổng,phí ,_sin,bi, th,nghi
-huc,c_bổ,c_ph,_si,dan,i ,uy
+luan ,bong, phi,tuy,học ,thi , luu
+luan,bon,phi, tuy,ọc ,thi, luu 
+ tap, bon,phi ,yt, học , thi,chuy
+tap, bong, phi ,yt , phan, thi ,ra 
+lua,bong ,phi_,bhyt,phan,hi ,luu 
+thuc,bo, phi_,bhy,hoc,hi,luu
+thuc , bo,ph,hyt,bieu,hao, chuy
+ tap ,giam ,hi_,bh, bieu,khao,ngh
+tap ,iam ,_phí,bhyt ,bieu , khao, ra 
+lu,giam,_phí ,hyt ,bi,i , ra

@@ -230,19 +230,14 @@ def so_sanh_mo_hinh(df: pd.DataFrame, **kw) -> pd.DataFrame:
     return pd.DataFrame(hang)
 
 
-def chon_mo_hinh(bang: pd.DataFrame, chenh_lech=0.02):
-    """Chọn theo Macro-F1 (CV). Ưu tiên Logistic Regression nếu kém mô hình tốt nhất không quá
-    `chenh_lech`, vì LR cho ra xác suất mà chính sách quyết định cần."""
-    tot_nhat = bang.loc[bang["Macro-F1 (CV)"].idxmax()]
-    lr = bang.set_index("Mô hình").loc["Logistic Regression", "Macro-F1 (CV)"]
-    if tot_nhat["Mô hình"] == "Logistic Regression":
-        return "Logistic Regression", "Logistic Regression có Macro-F1 cao nhất."
-    if tot_nhat["Macro-F1 (CV)"] - lr <= chenh_lech:
-        return "Logistic Regression", (
-            f"{tot_nhat['Mô hình']} cao hơn LR {tot_nhat['Macro-F1 (CV)'] - lr:.3f} (≤ {chenh_lech}), "
-            "chênh lệch không đáng kể nên chọn Logistic Regression vì cho ra xác suất.")
+def chon_mo_hinh(bang: pd.DataFrame):
+    """Chọn mô hình có Macro-F1 (CV) cao nhất. Nếu là Linear SVM thì xác suất (độ tin cậy) lấy qua
+    hiệu chỉnh CalibratedClassifierCV khi huấn luyện mô hình cuối (tao_pipeline(..., xac_suat=True))."""
+    bang = bang.sort_values("Macro-F1 (CV)", ascending=False).reset_index(drop=True)
+    tot_nhat, nhi = bang.loc[0], bang.loc[1]
     return tot_nhat["Mô hình"], (
-        f"{tot_nhat['Mô hình']} tốt hơn LR rõ rệt ({tot_nhat['Macro-F1 (CV)'] - lr:.3f} > {chenh_lech}).")
+        f"{tot_nhat['Mô hình']} có Macro-F1 (CV) cao nhất ({tot_nhat['Macro-F1 (CV)']:.3f}), "
+        f"hơn {nhi['Mô hình']} {tot_nhat['Macro-F1 (CV)'] - nhi['Macro-F1 (CV)']:.3f}.")
 
 
 def thi_nghiem_nho(df: pd.DataFrame, ten: str, tham_so: dict = None) -> pd.DataFrame:
